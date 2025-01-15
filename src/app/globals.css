@@ -1,12 +1,17 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+
+  --color-primary: #B6062A;
+  --color-secondary: #05237D;
+  
+  --bar-height: 64px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-background: #0a0a0a;
+    --color-foreground: #ededed;
   }
 }
 
@@ -18,7 +23,7 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--color-background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,6 +35,15 @@ body {
   margin: 0;
 }
 
+h1, h2, h3 {
+  font-family: 'Anton', serif;
+  letter-spacing: 0.25rem;
+}
+
+p, a, button, label, input, textarea {
+  font-family: 'Nunito Sans', serif;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -39,4 +53,169 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.main {
+  margin-top: calc(2 * var(--bar-height));
+}
+
+/* Style général pour les formulaires */
+form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Style pour chaque groupe de contrôle */
+.form-control {
+  margin-bottom: 1.5rem;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control input:focus,
+.form-control select:focus,
+.form-control textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.form-control select {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4L2 0zM2 5L0 3h4l-2 2z"/></svg>') no-repeat right 0.75rem center/8px 10px;
+}
+
+/* Style pour les checkboxes */
+/* Style pour les checkboxes */
+.form-control input[type="checkbox"] {
+  /* Masquer l'input natif tout en conservant l'accessibilité */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-control input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="white" d="M6.173 12.247l-4.146-4.147 1.414-1.414 2.732 2.732 6.247-6.248 1.414 1.414-7.661 7.663z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+
+.form-control input[type="checkbox"]:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* Ajustement pour les labels des checkboxes */
+.form-control label[for]:not(:empty) {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.form-control input[type="checkbox"]:focus {
+  outline: 2px solid rgba(0, 123, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Alignement des checkboxes et labels */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  flex-shrink: 0;
+}
+
+.checkbox-group label {
+  flex-grow: 1;
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.form-control label[for]:not(:empty) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Style pour les erreurs */
+.error {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Bouton de soumission */
+button[type="submit"] {
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+  background-color: var(--color-background);
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+
+button[type="submit"]:disabled {
+  background-color: var(--color-background-disabled);
+  color: var(--color-text-disabled); 
+  border: 2px solid var(--color-border-disabled); 
+  cursor: not-allowed; 
+}
+
+button[type="submit"]:disabled:hover {
+  background-color: var(--color-background-disabled);
+  color: var(--color-text-disabled);
 }
