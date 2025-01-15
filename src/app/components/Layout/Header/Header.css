@@ -1,0 +1,19 @@
+.header-container {
+    background-color: var(--color-primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--bar-height);
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--bar-height);
+
+    h1 {
+        cursor: pointer;
+    }
+}
