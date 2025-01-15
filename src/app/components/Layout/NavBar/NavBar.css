@@ -1,0 +1,15 @@
+.nav-container {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul li {
+        display: inline-block;
+        margin: 0 1.6rem;
+    }
+}
