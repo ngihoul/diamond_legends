@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/Layout/Header/Header";
 import NavBar from "./_components/Layout/NavBar/NavBar";
+import { ToasterProvider } from "@/lib/contexts/ToasterContext";
+import Toaster from "./_components/Toaster/Toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
+        {/* TODO: import font as explained in docs */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -37,11 +40,15 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
         <NavBar />
-        <main className="main">
-          <div className="wrapper">
-            {children}
-          </div>
-        </main>
+        <ToasterProvider>
+          <main className="main">
+            <Toaster />
+            <div className="wrapper">
+              {children}
+            </div>
+          </main>
+        </ToasterProvider>
+        
       </body>
     </html>
   );

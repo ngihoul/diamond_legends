@@ -8,9 +8,16 @@
   --color-text-light: #ffffff;
 
   --color-border: #dcdcdc;
-
-  --color-error: #d32f2f;
   
+  --color-error-bg: #f8d7da;
+  --color-error-text: #842029;
+  --color-error-border: #f5c2c7;
+  --color-error: var(--color-error-text);
+
+  --color-bg-success: #d1e7dd;
+  --color-success-text: #0f5132;
+  --color-success-border: #badbcc;
+
   --bar-height: 64px;
 }
 

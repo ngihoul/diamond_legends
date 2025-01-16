@@ -8,6 +8,7 @@ import './page.css';
 import getCountries from '@/lib/countries';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerSchema } from '@/lib/validations/schemas';
+import { useToaster } from '@/lib/contexts/ToasterContext';
 
 interface SignUpFormValues {
     username: string;
@@ -21,6 +22,7 @@ interface SignUpFormValues {
 export default function SignUp() {
     const [nationalities, setNationalities] = useState<Nationality[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { showToast } = useToaster();
   
     useEffect(() => {
       setIsLoading(true);
@@ -47,10 +49,18 @@ export default function SignUp() {
           },
           body: JSON.stringify(formData),
         });
+
         const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(`${data}`);
+        }
+
         console.log(data);
+        showToast(`Inscription réussie !`, 'success');
       } catch (e) {
-        console.error(e);
+        const errorMessage = (e as Error).message || 'Erreur inconnue';
+        showToast(`Erreur : ${errorMessage}`, 'error');
       }
     };
   
