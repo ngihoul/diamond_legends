@@ -5,10 +5,12 @@ import { API_URL } from '../../../../config';
 import { Nationality } from '@/app/models/nationality.model';
 
 import './page.css';
+import getCountries from '@/lib/countries';
 
 export default function SignUp() {
 
     const [nationalities, setNationalities] = useState<Nationality[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -19,24 +21,22 @@ export default function SignUp() {
     });
 
     useEffect(() => {
+        setIsLoading(true);
         const fetchNationalities = async () => {
-            try {
-                const response = await fetch(`${API_URL}country`);
-                const data = await response.json();
-                setNationalities(data);
-            } catch (error) {
-                console.error('Error fetching nationalities:', error);
-            }
+            const data = await getCountries();
+            setNationalities(data);
+            setIsLoading(false);
         }
 
         fetchNationalities();
-    });
+    }, []);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         formData.nationalityId = parseInt(formData.nationalityIdString);
+        // TODO: to place in lib
         try {
-            const response = await fetch(`${API_URL}auth/register`, {
+            const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +48,6 @@ export default function SignUp() {
         }catch(e) {
             console.error(e);
         }
-        
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -60,10 +59,10 @@ export default function SignUp() {
     }
 
     return (
-
         <div className="signup-container">
-            <h2>Sign Up</h2>
-            <p>Sign up to create an account</p>
+            <h2>S&apos;enregistrer</h2>
+            <p>Inscrivez-vous et rejoignez la communauté Diamond Legends</p>
+            
             <form className="signup-form" onSubmit={onSubmit}>
                 <div className="form-control">
                     <label id="username">Nom d&apos;utilisateur</label>
@@ -112,8 +111,10 @@ export default function SignUp() {
                 <div className="form-control">
                     <label id="nationality">Nationalité</label>
                     <select name="nationalityIdString" onChange={handleChange}>
-                        <option value="">Choisir une nationalit </option>
-                        {nationalities.map((n) => <option value={n.id} key={n.id}>{n.name}</option>)}
+                        <option value="">Choisir une nationalité</option>
+                        {!isLoading && (
+                            nationalities.map((n) => <option value={n.id} key={n.id}>{n.name}</option>)
+                        )}
                     </select>
                 </div>
 
