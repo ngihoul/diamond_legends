@@ -3,17 +3,18 @@
   --color-foreground: #171717;
 
   --color-primary: #B6062A;
-  --color-secondary: #05237D;
+  --color-secondary: #031D71;
+
+  --color-text-light: #ffffff;
+
+  --color-border: #dcdcdc;
   
   --bar-height: 64px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0a0a0a;
-    --color-foreground: #ededed;
-  }
-}
+/* @media (prefers-color-scheme: dark) {
+
+} */
 
 html,
 body {
@@ -53,11 +54,11 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 .wrapper {
   max-width: 1024px;
@@ -66,9 +67,9 @@ a {
 
 .main {
   margin-top: calc(2 * var(--bar-height));
+  padding: var(--bar-height);
 }
 
-/* Style général pour les formulaires */
 form {
   width: 100%;
   max-width: 600px;
@@ -76,7 +77,6 @@ form {
   padding: 1.5rem;
 }
 
-/* Style pour chaque groupe de contrôle */
 .form-control {
   margin-bottom: 1.5rem;
 }
@@ -113,10 +113,7 @@ form {
   background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4L2 0zM2 5L0 3h4l-2 2z"/></svg>') no-repeat right 0.75rem center/8px 10px;
 }
 
-/* Style pour les checkboxes */
-/* Style pour les checkboxes */
 .form-control input[type="checkbox"] {
-  /* Masquer l'input natif tout en conservant l'accessibilité */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -145,7 +142,6 @@ form {
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
 }
 
-/* Ajustement pour les labels des checkboxes */
 .form-control label[for]:not(:empty) {
   display: flex;
   align-items: center;
@@ -160,7 +156,6 @@ form {
   outline-offset: 2px;
 }
 
-/* Alignement des checkboxes et labels */
 .checkbox-group {
   display: flex;
   align-items: center;
@@ -186,14 +181,12 @@ form {
   gap: 0.5rem;
 }
 
-/* Style pour les erreurs */
 .error {
   color: var(--color-error);
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
-/* Bouton de soumission */
 button[type="submit"] {
   display: inline-block;
   width: 100%;

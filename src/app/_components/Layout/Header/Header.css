@@ -5,6 +5,7 @@
     left: 0;
     width: 100vw;
     height: var(--bar-height);
+    color: var(--color-text-light);
 }
 
 .header-wrapper {

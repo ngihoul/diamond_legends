@@ -3,13 +3,18 @@
     top: 64px;
     left: 0;
     width: 100vw;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: var(--bar-height);
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+        height: var(--bar-height);
+    }
 
     ul li {
         display: inline-block;
-        margin: 0 1.6rem;
+        margin: 0 3.2rem 0 0;
     }
 }
