@@ -20,3 +20,10 @@ export const registerSchema = Yup.object().shape({
     nationalityIdString: Yup.string()
         .required('La nationalité est requise'),
 });
+
+export const LoginSchema = Yup.object().shape({
+    emailOrUsername: Yup.string()
+        .required('Le nom d\'utilisateur ou l\'email est requis'),
+    password: Yup.string()
+        .required('Le mot de passe est requis'),
+});

@@ -1,23 +1,7 @@
 'use client';
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-
-type ToastType = 'success' | 'error';
-
-interface ToastMessage {
-  message: string;
-  type: ToastType;
-}
-
-interface ToasterContextType {
-  toast: ToastMessage | null;
-  showToast: (message: string, type: ToastType) => void;
-  hideToast: () => void;
-}
-
-interface ToasterProviderProps {
-  children: ReactNode;
-}
+import React, { createContext, useState, useContext } from 'react';
+import { ToasterContextType, ToasterProviderProps, ToastMessage, ToastType } from '../models/toaster.model';
 
 const ToasterContext = createContext<ToasterContextType | undefined>(undefined);
 

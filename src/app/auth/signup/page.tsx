@@ -1,23 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { API_URL } from '../../../../config';
-import { Nationality } from '@/app/models/nationality.model';
+import { Nationality } from '@/lib/models/nationality.model';
 
 import './page.css';
-import getCountries from '@/lib/countries';
+import getCountries from '@/lib/services/countries';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerSchema } from '@/lib/validations/schemas';
 import { useToaster } from '@/lib/contexts/ToasterContext';
-
-interface SignUpFormValues {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    nationalityIdString: string;
-    nationalityId?: number;
-}
+import { SignUpFormValues } from '@/lib/models/auth.model';
+import { Register } from '@/lib/services/auth';
 
 export default function SignUp() {
     const [nationalities, setNationalities] = useState<Nationality[]>([]);
@@ -40,28 +32,8 @@ export default function SignUp() {
         ...values,
         nationalityId: parseInt(values.nationalityIdString),
       };
-  
-      try {
-        const response = await fetch(`${API_URL}/auth/register`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(`${data}`);
-        }
-
-        console.log(data);
-        showToast(`Inscription réussie !`, 'success');
-      } catch (e) {
-        const errorMessage = (e as Error).message || 'Erreur inconnue';
-        showToast(`Erreur : ${errorMessage}`, 'error');
-      }
+      
+      await Register(formData, showToast);
     };
   
     return (

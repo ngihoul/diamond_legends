@@ -1,5 +1,6 @@
-import { Nationality } from "@/app/models/nationality.model";
-import { API_URL } from "../../config";
+import { Nationality } from "@/lib/models/nationality.model";
+import { API_URL } from "../../../config";
+
 
 export default async function getCountries(): Promise<Nationality[]> {
     try {
