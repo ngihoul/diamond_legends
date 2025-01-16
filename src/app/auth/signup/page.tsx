@@ -56,8 +56,10 @@ export default function SignUp() {
   
     return (
       <div className="signup-container">
-        <h2>S&apos;enregistrer</h2>
-        <p>Inscrivez-vous et rejoignez la communauté Diamond Legends</p>
+        <div className="heading">
+          <h2>S&apos;enregistrer</h2>
+          <p>Inscrivez-vous et rejoignez la communauté Diamond Legends</p>
+        </div>
         
         <Formik
           initialValues={{
