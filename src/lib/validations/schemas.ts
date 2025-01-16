@@ -17,6 +17,6 @@ export const registerSchema = Yup.object().shape({
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password')], 'Les mots de passe doivent correspondre')
         .required('La confirmation du mot de passe est requise'),
-    nationalityId: Yup.number()
+    nationalityIdString: Yup.string()
         .required('La nationalité est requise'),
 });
