@@ -38,6 +38,10 @@ body {
 h1, h2, h3 {
   font-family: 'Anton', serif;
   letter-spacing: 0.25rem;
+
+  a {
+    font-family: inherit;
+  }
 }
 
 p, a, button, label, input, textarea {
