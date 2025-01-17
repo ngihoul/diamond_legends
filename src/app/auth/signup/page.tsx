@@ -7,17 +7,14 @@ import './page.css';
 import getCountries from '@/lib/services/countries';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerSchema } from '@/lib/validations/schemas';
-import { useToaster } from '@/lib/contexts/ToasterContext';
 import { SignUpFormValues } from '@/lib/models/auth.model';
-import { Register } from '@/lib/services/auth';
-import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/contexts/authContext';
 
 export default function SignUp() {
     const [nationalities, setNationalities] = useState<Nationality[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
-    const { showToast } = useToaster();
-    const router = useRouter();
+    const { register } = useAuth();
   
     useEffect(() => {
       setIsLoading(true);
@@ -36,7 +33,7 @@ export default function SignUp() {
         nationalityId: parseInt(values.nationalityIdString),
       };
       
-      await Register(formData, showToast, router);
+      await register(formData);
     };
   
     return (

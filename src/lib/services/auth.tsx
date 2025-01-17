@@ -1,58 +1,47 @@
-import { API_URL } from "../../../config";
-import { SignInFormValues, SignUpFormValues } from "../models/auth.model";
-import { ToastType } from "../models/toaster.model";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+// import { SignInFormValues, SignUpFormValues } from "../models/auth.model";
+// import { ToastType } from "../models/toaster.model";
+// import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+// import apiClient from "./api";
 
-export async function Register(values: SignUpFormValues, showToast : (message: string, type: ToastType) => void): Promise<void> {
-    try {
-        const response = await fetch(`${API_URL}/auth/register`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        });
+// export async function Register(
+//     values: SignUpFormValues, 
+//     showToast : (message: string, type: ToastType) => void,
+//     router : AppRouterInstance
+// ): Promise<void> {
+//     await apiClient.post('/auth/register', values)
+//         .then(
+//             () => {
+//                 showToast(`Inscription réussie !`, 'success');
+//                 router.push('/');
+//             }
+//         )
+//         .catch((error: Error) => {
+//             handleError(error, showToast);
+//         }
+//     );
+// };
 
-        const data = await response.json();
+// export async function Login(
+//     values: SignInFormValues,
+//     showToast : (message: string, type: ToastType) => void, 
+//     router: AppRouterInstance
+// ): Promise<void> {
+//     await apiClient.post('/auth/login', values)
+//         .then((response) => {
+//             saveToken(response.data);
+//             showToast(`Connexion établie !`, 'success');
+//             router.push('/');
+//         })
+//         .catch((error: Error) => {
+//             handleError(error, showToast);
+//         });
+// }
 
-        if (!response.ok) {
-            throw new Error(`${data}`);
-        }
+// const saveToken = (token: string): void => {
+//     localStorage.setItem('token', token);
+// }
 
-        showToast(`Inscription réussie !`, 'success');
-    } catch (e) {
-        const errorMessage = (e as Error).message || 'Erreur inconnue';
-        showToast(`Erreur : ${errorMessage}`, 'error');
-    }
-};
-
-export async function Login(values: SignInFormValues, showToast : (message: string, type: ToastType) => void, router: AppRouterInstance): Promise<void> {
-    try {
-        const response = await fetch(`${API_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        });
-
-        if (!response.ok) {
-            throw new Error(`${response.statusText}`);
-        }
-
-        const data = await response.text();
-
-        saveToken(data);
-
-        showToast(`Connexion établie !`, 'success');
-
-        router.push('/');
-    } catch (e) {
-        const errorMessage = (e as Error).message || 'Erreur inconnue';
-        showToast(`Erreur : ${errorMessage}`, 'error');
-    }
-}
-
-const saveToken = (token: string): void => {
-    localStorage.setItem('token', token);
-}
+// const handleError = (error: Error, showToast : (message: string, type: ToastType) => void): void => {
+//     const errorMessage = error.message || 'Erreur inconnue';
+//     showToast(`Erreur : ${errorMessage}`, 'error');
+// }

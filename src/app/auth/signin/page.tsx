@@ -3,16 +3,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { LoginSchema } from "@/lib/validations/schemas";
 import { SignInFormValues } from "@/lib/models/auth.model";
-import { Login } from "@/lib/services/auth";
-import { useToaster } from "@/lib/contexts/ToasterContext";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/contexts/authContext";
 
 export default function SignIn() {
-    const { showToast } = useToaster();
-    const router = useRouter();
+    const { login } = useAuth();
 
     const handleSubmit = async (values: SignInFormValues) => {
-        await Login(values, showToast, router);
+        await login(values);
     }
 
     return (

@@ -29,7 +29,7 @@ export const ToasterProvider: React.FC<ToasterProviderProps> = ({ children }) =>
 
   return (
     <ToasterContext.Provider value={{ toast, showToast, hideToast }}>
-      {children}
+      { children }
     </ToasterContext.Provider>
   );
 };

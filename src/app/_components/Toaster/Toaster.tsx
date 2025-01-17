@@ -1,6 +1,6 @@
 'use client';
 
-import { useToaster } from '@/lib/contexts/ToasterContext';
+import { useToaster } from '@/lib/contexts/toasterContext';
 import './Toaster.css';
 
 export default function Toaster() {
