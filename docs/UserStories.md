@@ -16,7 +16,7 @@
     3. Le logo de l'équipe (facultatif)
         - Sauvegarde du chemin
         - Prévisualisation
-        - logo de base proposé (demandé à une IA)
+        - logos de base proposés (demandé à une IA)
     4. Les couleurs de l'uniforme (primaire, secondaire, tertiaire)
         - Aperçu en direct
 
