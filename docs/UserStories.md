@@ -1,13 +1,13 @@
 # Baseball Manager Game
 ## User Stories
 
-1. L'utilisateur peut s'inscrire
-    - Username & email uniques
-    - Salt & Pepper sur le hach du mot de passe
-    - ? mail de vérification ?
+1. L'utilisateur peut s'inscrire [v]
+    - Username & email uniques [v]
+    - Salt & Pepper sur le hach du mot de passe [v]
+    - BONUS : mail de vérification
 
-2. L'utilisateur peut se connecter
-    - ? Protection contre les attaques DDoS ?
+2. L'utilisateur peut se connecter [v]
+    - BONUS : Protection contre les attaques DDoS
 
 3. L'utilisateur peut créer une équipe  
     1. Choisir le nom de l'équipe
