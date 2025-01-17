@@ -4,7 +4,7 @@ import Router from "next/router";
 
 const apiClient = axios.create({
     baseURL: API_URL,
-    timeout: 5000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
     },

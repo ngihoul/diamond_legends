@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { User } from "./user.model";
 
 export interface SignInFormValues {
     emailOrUsername: string;
@@ -16,7 +15,7 @@ export interface SignUpFormValues {
 }
 
 export interface AuthContextType {
-    user: User | null;
+    userId: string | null;
     login: (values: SignInFormValues) => Promise<void>;
     register: (values: SignUpFormValues) => Promise<void>;
     logout: () => Promise<void>;
@@ -24,4 +23,15 @@ export interface AuthContextType {
 
 export interface AuthProviderProps {
   children: ReactNode;
+}
+
+export interface Payload {
+    Id: string;
+    Username: string;
+    aud: string;
+    exp: number;
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress": string;
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": string;
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": string;
+    iss: string;
 }

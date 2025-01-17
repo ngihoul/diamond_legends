@@ -1,12 +1,12 @@
 'use client';
 
-import React, { createContext, useContext, useState } from "react";
-import { AuthContextType, AuthProviderProps, SignInFormValues, SignUpFormValues } from "../models/auth.model";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { AuthContextType, AuthProviderProps, Payload, SignInFormValues, SignUpFormValues } from "../models/auth.model";
 import apiClient from "../services/api";
-import { User } from "../models/user.model";
 import { ToastType } from "../models/toaster.model";
-import { useToaster } from "./toasterContext";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
+import { useToaster } from "./toasterContext";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -19,15 +19,27 @@ export const useAuth = () => {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
     const { showToast } = useToaster();
     const router = useRouter();
+
+    useEffect(() => {
+        const token = getToken();
+        if(isTokenValid(token)) {
+            setUserId(getUserId(token));
+        } else {
+            removeToken();
+            setUserId(null);
+            router.push('/');
+        }
+    }, []);
 
     const login = async (values: SignInFormValues) => {
         await apiClient.post('/auth/login', values)
             .then((response) => {
                 saveToken(response.data);
-                setUser(response.data.user);
+                const userId = getUserId(response.data);
+                setUserId(userId);
                 showToast(`Connexion réussie !`, 'success');
                 router.push('/');
             })
@@ -51,11 +63,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = async () => {
         removeToken();
-        setUser(null);
+        setUserId(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout}}>
+        <AuthContext.Provider value={{ userId, login, register, logout}}>
             { children }
         </AuthContext.Provider>
     );
@@ -66,9 +78,39 @@ const saveToken = (token: string): void => {
     localStorage.setItem('token', token);
 }
 
+const getToken = (): string | null => {
+    return localStorage.getItem('token');
+}
+
 const removeToken = (): void => {
     localStorage.removeItem('token');
 }
+
+const isTokenValid = (token: string | null): boolean => {
+    if(!token) {
+        return false;
+    }
+    const decoded: Payload = jwtDecode(token);
+    return decoded.exp > Date.now() / 1000;
+}
+
+const getUserId = (token: string | null): string | null => {
+    if(!token) {
+        return null;
+    }
+    const decoded: Payload = jwtDecode(token);
+    return decoded.Id
+}
+
+// const getUser = async (token: string): Promise<User | null> => {
+//     if (isTokenValid(token)) {
+//         const decoded: Payload = jwtDecode(token);
+//         const response = await apiClient.get(`/users/${decoded.Id}`);
+//         return response.data;
+//     } else {
+//         return null;
+//     }
+// }
 
 const handleError = (error: Error, showToast : (message: string, type: ToastType) => void): void => {
     const errorMessage = error.message || 'Erreur inconnue';
