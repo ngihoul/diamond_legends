@@ -1,6 +1,9 @@
 import axios from "axios";
-import { API_URL } from "../../../config";
 import Router from "next/router";
+
+import { API_URL } from "../../../config";
+import { Payload } from "../models/auth.model";
+import { jwtDecode } from "jwt-decode";
 
 const apiClient = axios.create({
     baseURL: API_URL,
@@ -13,7 +16,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
-        if(token) {
+        if(isTokenValid(token)) {
             config.headers.Authorization = `Bearer ${token}`
         }
 
@@ -46,5 +49,13 @@ apiClient.interceptors.response.use(
         }
     }
 );
+
+const isTokenValid = (token: string | null): boolean => {
+    if(!token) {
+        return false;
+    }
+    const decoded: Payload = jwtDecode(token);
+    return decoded.exp > Date.now() / 1000;
+}
 
 export default apiClient;
