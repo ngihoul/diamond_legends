@@ -10,11 +10,14 @@ import { registerSchema } from '@/lib/validations/schemas';
 import { useToaster } from '@/lib/contexts/ToasterContext';
 import { SignUpFormValues } from '@/lib/models/auth.model';
 import { Register } from '@/lib/services/auth';
+import { useRouter } from 'next/navigation';
 
 export default function SignUp() {
     const [nationalities, setNationalities] = useState<Nationality[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    
     const { showToast } = useToaster();
+    const router = useRouter();
   
     useEffect(() => {
       setIsLoading(true);
@@ -33,10 +36,13 @@ export default function SignUp() {
         nationalityId: parseInt(values.nationalityIdString),
       };
       
-      await Register(formData, showToast);
+      await Register(formData, showToast, router);
     };
   
     return (
+      // TODO : Change border-color when there is no more errors.
+      // https://stackoverflow.com/questions/62256709/change-style-of-existing-input-fields-whenever-error-occurs-in-react-formik
+
       <div className="signup-container">
         <div className="heading">
           <h2>S&apos;enregistrer</h2>
