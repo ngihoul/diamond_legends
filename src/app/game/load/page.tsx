@@ -48,7 +48,7 @@ export default function Load() {
                                         <td>{team.name}</td>
                                         <td>{team.season}</td>
                                         <td>
-                                            <Link className="btn" href={`/user/${team.id}/dashboard`}>Charger</Link>
+                                            <Link className="btn" href={`/game/${team.id}/dashboard`}>Charger</Link>
                                         </td>
                                     </tr>
                                 );
