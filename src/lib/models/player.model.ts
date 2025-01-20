@@ -1,0 +1,30 @@
+export interface Player {
+    id: number;
+    firstname: string;
+    lastname: string;
+    dateOfBirth: Date;
+    nationality: string;
+    throw: number;
+    bat: number;
+    salary: number;
+    energy: number;
+    contact: number;
+    contactPotential: number;
+    power: number;
+    powerPotential: number;
+    running: number;
+    runningPotential: number;
+    defense: number;
+    defensePotential: number;
+    mental: number;
+    mentalPotential: number;
+    stamina: number;
+    staminaPotential: number;
+    control: number;
+    controlPotential: number;
+    velocity: number;
+    velocityPotential: number;
+    movement: number;
+    movementPotential: number;
+    positions: string[];
+}
