@@ -21,22 +21,23 @@
         - Aperçu en direct
 
 4. L'utilisateur peut lancer une partie solo
-    - Une league se composée de 6 équipes
-    - Le nom de la league est généré automatiquement
-    - Les 5 équipes adverses sont générés automatiquement et sont liées à l'utilisateur "BOT"
-    - Les rosters sont générés automatiquement :
+    - Une league se composée de 6 équipes [v]
+    - Le nom de la league est généré automatiquement [v]
+    - Les 5 équipes adverses sont générés automatiquement et sont liées à l'utilisateur "BOT" [v]
+    - Les rosters sont générés automatiquement : [v]
         - 25 joueurs au total
         - 2 C
         - 1 1B
         - 1 2B
-        - 2 SS
+        - 1 SS
         - 1 3B
+        - 1 UTL
+        - 1 DH
         - 5 OF
         - 5 SP
         - 5 RP
         - 2 CL
-        - TODO: Check composition des rosters en MLB
-    - 50 joueurs "Free Agent" sont créés en plus
+    - BONUS : 50 joueurs "Free Agent" sont créés en plus - possible à échanger
 
 5. L'utilisateur peut consulter son roster (équipe de 25 joueurs) et les autres rosters
 
