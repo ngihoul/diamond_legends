@@ -19,7 +19,10 @@ export const useAuth = () => {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [userId, setUserId] = useState<string | null>(null);
+    const token = getToken();
+    const initialUserId = token && isTokenValid(token) ? getUserId(token) : null;
+
+    const [userId, setUserId] = useState<string | null>(initialUserId);
     const { showToast } = useToaster();
     const router = useRouter();
 
@@ -40,8 +43,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 saveToken(response.data);
                 const userId = getUserId(response.data);
                 setUserId(userId);
+                console.log(userId);
                 showToast(`Connexion réussie !`, 'success');
-                router.push('/');
+                router.push('/user/load');
             })
             .catch((error: Error) => {
                 handleError(error, showToast);
