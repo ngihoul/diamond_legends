@@ -26,7 +26,7 @@ export default function Load() {
                 showToast(error.message, 'error');
             });
         }
-    }, []);
+    }, [userId]);
 
     return (
         <div>

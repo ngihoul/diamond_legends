@@ -25,8 +25,15 @@ export interface TeamCreationValues {
     city: string;
     countryIdString: string;
     countryId?: number;
-    // logo: string,
-    color_1: string;
-    color_2: string;
-    color_3: string;
+    logo?: string | null,
+    color_1?: string;
+    color_2?: string;
+    color_3?: string;
+}
+
+export interface UniformValues {
+    primaryColor: string;
+    secondaryColor: string;
+    tertiaryColor?: string;
+    teamName?: string;
 }

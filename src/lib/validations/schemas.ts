@@ -41,10 +41,9 @@ export const TeamCreationSchema = Yup.object().shape({
         .required('La nationalité de l\'equipe est requise'),
     // logo: ,
     color_1: Yup.string()
-        .required('La couleur primaire de l\'equipe est requise')
         .matches(/^#([A-Fa-f0-9]{6})$/,),
     color_2: Yup.string()
-        .required('La couleur primaire de l\'equipe est requise')
         .matches(/^#([A-Fa-f0-9]{6})$/,),
     color_3: Yup.string()
+        .matches(/^#([A-Fa-f0-9]{6})$/,),
 });
