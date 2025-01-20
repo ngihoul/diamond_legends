@@ -45,7 +45,7 @@ export default function New() {
                     color_2: '',
                     color_3: '',
                 }}
-                validationSChema={TeamCreationSchema}
+                validationSchema={TeamCreationSchema}
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting}) => (
