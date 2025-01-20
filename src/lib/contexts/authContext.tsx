@@ -84,12 +84,9 @@ const saveToken = (token: string): void => {
 
 const getToken = (): string | null => {
     // QUESTION : ReferenceError: localStorage is not defined
-    let token: string | null = null;
-    if(typeof window !== 'undefined'){
-        token = window.localStorage.getItem('token');
-    }
 
-    return token;
+    return window.localStorage.getItem('token');
+
 }
 
 const removeToken = (): void => {
