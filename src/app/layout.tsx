@@ -6,6 +6,7 @@ import NavBar from "./_components/Layout/NavBar/NavBar";
 import Toaster from "./_components/Toaster/Toaster";
 import { AuthProvider } from "@/lib/contexts/authContext";
 import { ToasterProvider } from "@/lib/contexts/toasterContext";
+import { GameProvider } from "@/lib/contexts/gameContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,20 +38,21 @@ export default function RootLayout({
       </head>
       
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ToasterProvider>
-        <AuthProvider>
-          <Header />
-          <NavBar />
-            <main className="main">
-              <Toaster />
-              <div className="wrapper">
-                {children}
-              </div>
-            </main>
+          <ToasterProvider>
+            <AuthProvider>
+              <GameProvider>
+                <Header />
+                <NavBar />
+                <main className="main">
+                  <Toaster />
+                  <div className="wrapper">
+                    {children}
+                  </div>
+                </main>
+              </GameProvider>
             </AuthProvider>
           </ToasterProvider>
         </body>
-      
     </html>
   );
 }
