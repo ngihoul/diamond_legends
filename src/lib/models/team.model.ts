@@ -19,3 +19,14 @@ export interface Team {
     color_3: string;
     players: Player[];
 }
+
+export interface TeamCreationValues {
+    name: string;
+    city: string;
+    countryIdString: string;
+    countryId?: number;
+    // logo: string,
+    color_1: string;
+    color_2: string;
+    color_3: string;
+}

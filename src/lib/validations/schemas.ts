@@ -27,3 +27,24 @@ export const LoginSchema = Yup.object().shape({
     password: Yup.string()
         .required('Le mot de passe est requis'),
 });
+
+export const TeamCreationSchema = Yup.object().shape({
+    name: Yup.string()
+        .required('Le nom de l\'equipe est requis')
+        .min(3, 'Le nom de l\'equipe doit contenir au moins 3 caractères')
+        .max(120, 'Le nom de l\'equipe doit contenir au plus 120 caractères'),
+    city: Yup.string()
+        .required('La ville de l\'equipe est requise')
+        .min(3, 'La ville de l\'equipe doit contenir au moins 3 caractères')
+        .max(120, 'La ville de l\'equipe doit contenir au plus 120 caractères'),
+    countryIdString: Yup.string()
+        .required('La nationalité de l\'equipe est requise'),
+    // logo: ,
+    color_1: Yup.string()
+        .required('La couleur primaire de l\'equipe est requise')
+        .matches(/^#([A-Fa-f0-9]{6})$/,),
+    color_2: Yup.string()
+        .required('La couleur primaire de l\'equipe est requise')
+        .matches(/^#([A-Fa-f0-9]{6})$/,),
+    color_3: Yup.string()
+});
