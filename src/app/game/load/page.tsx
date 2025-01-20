@@ -21,7 +21,7 @@ export default function Load() {
             .then((response) => {
                 setTeams(response.data);
             })
-            .catch((error) => {
+            .catch((error: Error) => {
                 console.log("Erreur depuis load");
                 showToast(error.message, 'error');
             });
