@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 setUserId(userId);
                 console.log(userId);
                 showToast(`Connexion réussie !`, 'success');
-                router.push('/user/load');
+                router.push('/game/load');
             })
             .catch((error: Error) => {
                 handleError(error, showToast);
@@ -79,15 +79,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 
 const saveToken = (token: string): void => {
-    localStorage.setItem('token', token);
+    window.localStorage.setItem('token', token);
 }
 
 const getToken = (): string | null => {
-    return localStorage.getItem('token');
+    // QUESTION : ReferenceError: localStorage is not defined
+    let token: string | null = null;
+    if(typeof window !== 'undefined'){
+        token = window.localStorage.getItem('token');
+    }
+
+    return token;
 }
 
 const removeToken = (): void => {
-    localStorage.removeItem('token');
+    window.localStorage.removeItem('token');
 }
 
 const isTokenValid = (token: string | null): boolean => {
