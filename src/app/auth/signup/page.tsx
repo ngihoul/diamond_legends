@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Nationality } from '@/lib/models/nationality.model';
 
 import './page.css';
 import getCountries from '@/lib/services/countries';
@@ -9,9 +8,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerSchema } from '@/lib/validations/schemas';
 import { SignUpFormValues } from '@/lib/models/auth.model';
 import { useAuth } from '@/lib/contexts/authContext';
+import { Country } from '@/lib/models/country.model';
 
 export default function SignUp() {
-    const [nationalities, setNationalities] = useState<Nationality[]>([]);
+    const [nationalities, setNationalities] = useState<Country[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     
     const { register } = useAuth();
@@ -112,7 +112,7 @@ export default function SignUp() {
                 </Field>
                 <ErrorMessage name="nationalityIdString" component="div" className="error" />
               </div>
-  
+              {/* TODO : create a custom LoadingSpinner */}
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? 'Chargement...' : 'S\'inscrire'}
               </button>
