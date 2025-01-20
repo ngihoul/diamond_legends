@@ -23,7 +23,7 @@ export default function Header() {
                     {userId && (
                         <>
                             <Link href={'/profile'}>Profile</Link>
-                            <Link href={'/auth/logout'}>Se deconnecter</Link>
+                            <Link href={'/auth/signout'}>Se deconnecter</Link>
                         </>
                     )}
                 </div>
