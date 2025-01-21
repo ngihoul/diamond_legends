@@ -2,7 +2,7 @@
 
 import UniformPreview from "@/app/_components/UniformPreview/UniformPreview";
 import { Country } from "@/lib/models/country.model";
-import { TeamCreationValues } from "@/lib/models/team.model";
+import { Team, TeamCreationValues } from "@/lib/models/team.model";
 import getCountries from "@/lib/services/countries";
 import createTeam from "@/lib/services/team";
 import { TeamCreationSchema } from "@/lib/validations/schemas"
@@ -11,6 +11,9 @@ import { useEffect, useState } from "react"
 import { CompactPicker } from 'react-color';
 
 import './page.css';
+import { useRouter } from "next/navigation";
+import { useGame } from "@/lib/contexts/gameContext";
+import { useToaster } from "@/lib/contexts/toasterContext";
 
 export default function New() {
     const [countries, setCountries] = useState<Country[]>([]);
@@ -20,6 +23,11 @@ export default function New() {
         color_2: '#0D00A4',
         color_3: '#0D00A4'
     });
+
+    const router = useRouter();
+
+    const { changeTeam } = useGame();
+    const { showToast } = useToaster(); 
 
     useEffect(() => {
         setIsLoading(true);
@@ -44,7 +52,14 @@ export default function New() {
             color_3: colors.color_3.substring(1)
         };
 
-        createTeam(formData);
+        try {
+            const team: Team = await createTeam(formData);
+            changeTeam(team.id);
+            showToast("Equipe crée avec succès", 'success');
+            router.push('/game/dashboard')
+        }catch(error: any) {
+            showToast(error.message, 'error');
+        }
     }
 
     return (
