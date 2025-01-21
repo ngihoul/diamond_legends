@@ -4,7 +4,7 @@ import UniformPreview from "@/app/_components/UniformPreview/UniformPreview";
 import { Country } from "@/lib/models/country.model";
 import { Team, TeamCreationValues } from "@/lib/models/team.model";
 import getCountries from "@/lib/services/countries";
-import createTeam from "@/lib/services/team";
+import { createTeam } from "@/lib/services/team";
 import { TeamCreationSchema } from "@/lib/validations/schemas"
 import { ErrorMessage, Field, Form, Formik } from "formik"
 import { useEffect, useState } from "react"
@@ -55,7 +55,7 @@ export default function New() {
         try {
             const team: Team = await createTeam(formData);
             changeTeam(team.id);
-            showToast("Equipe crée avec succès", 'success');
+            showToast("Equipe créée avec succès", 'success');
             router.push('/game/dashboard')
         }catch(error: any) {
             showToast(error.message, 'error');

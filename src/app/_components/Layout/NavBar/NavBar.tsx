@@ -18,6 +18,7 @@ export default function NavBar() {
             <nav className="nav-container">
                 <div className="nav-wrapper wrapper">
                     <Image src={ball} alt="ball" width={31} height={40} />
+                    {/* TODO : test on validity of token, not userId */}
                     {(userId && !teamSelected ) && (
                         <Link href={'/game/load'}>Sélectionne ton équipe !</Link>
                     )}
@@ -28,8 +29,12 @@ export default function NavBar() {
 
                     {teamSelected && (
                         <ul>
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Roster</a></li>
+                            <li>
+                                <Link href={'/game/dashboard'}>Dashboard</Link>
+                            </li>
+                            <li>
+                                <Link href={'/game/roster'}>Roster</Link>
+                            </li>
                             <li><a href="#">League</a></li>
                             <li><a href="#">Stats</a></li>
                         </ul>

@@ -1,0 +1,15 @@
+.roster-container {
+    h2 {
+        margin-bottom: 1.6rem;
+    }
+}
+
+.roster-table {
+    img {
+        margin-left: 0.4rem;
+    }
+
+    .energy-bar {
+        height: 10px;
+    }
+}

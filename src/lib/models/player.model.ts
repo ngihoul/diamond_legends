@@ -1,11 +1,14 @@
+import { Country } from "./country.model";
+
 export interface Player {
     id: number;
     firstname: string;
     lastname: string;
     dateOfBirth: Date;
-    nationality: string;
-    throw: number;
-    bat: number;
+    nationality: Country;
+    positions: PositionType[];
+    throw: HandedType;
+    bat: HandedType;
     salary: number;
     energy: number;
     contact: number;
@@ -26,5 +29,25 @@ export interface Player {
     velocityPotential: number;
     movement: number;
     movementPotential: number;
-    positions: string[];
+}
+
+export enum PositionType {
+    "SP" = 1,
+    "C" = 2,
+    "1B" = 3,
+    "2B" = 4,
+    "3B" = 5,
+    "SS" = 6,
+    "LF" = 7,
+    "CF" = 8,
+    "RF" = 9,
+    "DH" = 10,
+    "UTL" = 11,
+    "RP" = 12,
+    "CL" = 13
+}
+
+export enum HandedType {
+    "R" = 0,
+    "L" = 1
 }
