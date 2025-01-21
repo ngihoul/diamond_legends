@@ -50,13 +50,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             showToast('Connexion réussie !', 'success');
             router.push('/game/load');
         } catch (error: any) {
+            // TODO : trouver un autre type que any
             const errorMessage = error.message || 'Une erreur est survenue';
             showToast(errorMessage, 'error');
             
             // Gestion des redirections ici si nécessaire
-            if (error.response?.status === 401) {
-                router.push('/auth/signin');
-            }
+            // if (error.response?.status === 401) {
+            //     router.push('/auth/signin');
+            // }
         }
     };
 
