@@ -18,7 +18,7 @@ export default function NavBar() {
             <nav className="nav-container">
                 <div className="nav-wrapper wrapper">
                     <Image src={ball} alt="ball" width={31} height={40} />
-                    {userId && (
+                    {(userId && !teamSelected ) && (
                         <Link href={'/game/load'}>Sélectionne ton équipe !</Link>
                     )}
 

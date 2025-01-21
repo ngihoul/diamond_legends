@@ -12,7 +12,7 @@
         align-items: center;
         height: var(--bar-height);
 
-        a {
+        a, ul {
             align-self:last baseline;
             padding-bottom: 0.8rem;
             margin-left: 0.8rem;
