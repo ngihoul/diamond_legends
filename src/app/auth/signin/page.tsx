@@ -46,7 +46,7 @@ export default function SignIn() {
                             />
                             <ErrorMessage name="password" component="div" className="error" />
                         </div>
-                        <button type="submit" disabled={isSubmitting}>
+                        <button className="btn" type="submit" disabled={isSubmitting}>
                             {isSubmitting ? 'Chargement...' : 'S\'inscrire'}
                         </button>
                     </Form>
