@@ -47,7 +47,7 @@ export default function SignIn() {
                             <ErrorMessage name="password" component="div" className="error" />
                         </div>
                         <button className="btn" type="submit" disabled={isSubmitting || !isValid }>
-                            {isSubmitting ? 'Chargement...' : 'S\'inscrire'}
+                            {isSubmitting ? 'Chargement...' : 'Se connecter'}
                         </button>
                     </Form>
                 )}
