@@ -5,8 +5,8 @@ export async function createTeam(values : TeamCreationValues) {
     try {
         const response = await apiClient.post('/team', values);
         return response.data;
-    }catch(error: any) {
-        throw new Error(error.message, error);
+    }catch(error) {
+        throw new Error((error as Error).message, (error as Error));
     }
 }
 
@@ -14,7 +14,7 @@ export async function getTeam(teamId: number): Promise<Team> {
     try {
         const response = await apiClient.get(`/team/${teamId}`); 
         return response.data;
-    }catch(error: any) {
-        throw new Error(error.message, error);
+    }catch(error) {
+        throw new Error((error as Error).message, (error as Error));
     }
 }
