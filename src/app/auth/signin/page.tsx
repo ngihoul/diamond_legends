@@ -16,7 +16,7 @@ export default function SignIn() {
         <div className="signin-container">
             <div className="heading">
                 <h2>Se connecter</h2>
-                <p>Vos équipes vous attendent !</p>
+                <p className="subtitle">Vos équipes vous attendent !</p>
             </div>
             <Formik
                 initialValues={{

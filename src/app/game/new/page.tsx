@@ -51,6 +51,7 @@ export default function New() {
         <div>
             <div className="heading">
                 <h2>Nouvelle partie</h2>
+                <p className="subtitle">Let&apos;s go to the ballpark !</p>
             </div>
             
             <Formik

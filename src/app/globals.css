@@ -58,6 +58,12 @@ h1, h2, h3 {
 }
 
 h2 {
+  margin-bottom: 0.2rem;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
   margin-bottom: 1.6rem;
 }
 
