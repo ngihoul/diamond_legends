@@ -7,6 +7,7 @@ import { ToastType } from "../models/toaster.model";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { useToaster } from "./toasterContext";
+import { useGame } from "./gameContext";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -24,6 +25,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const [userId, setUserId] = useState<string | null>(initialUserId);
     const { showToast } = useToaster();
+    const { changeTeam } = useGame();
     const router = useRouter();
 
     useEffect(() => {
@@ -68,6 +70,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const logout = async () => {
         removeToken();
         setUserId(null);
+        changeTeam(null);
     };
 
     return (

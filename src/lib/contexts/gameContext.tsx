@@ -19,7 +19,7 @@ export const useGame = () => {
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     const [teamSelected, setTeamSelected] = useState<number | null>(null);
 
-    const changeTeam = (teamId: number) => {
+    const changeTeam = (teamId: number | null) => {
         setTeamSelected(teamId);
     }
 

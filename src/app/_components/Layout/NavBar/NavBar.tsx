@@ -22,7 +22,7 @@ export default function NavBar() {
                         <Link href={'/game/load'}>Sélectionne ton équipe !</Link>
                     )}
 
-                    {!userId && (
+                    {(!userId && !teamSelected) && (
                         <Link className="nav-text" href={'/auth/signup'}>Rejoins le Hall of Fame, inscris-toi !</Link>
                     )}
 

@@ -39,8 +39,9 @@ export default function RootLayout({
       
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <ToasterProvider>
-            <AuthProvider>
-              <GameProvider>
+            <GameProvider>
+              <AuthProvider>
+              
                 <Header />
                 <NavBar />
                 <main className="main">
@@ -49,8 +50,8 @@ export default function RootLayout({
                     {children}
                   </div>
                 </main>
-              </GameProvider>
-            </AuthProvider>
+              </AuthProvider>
+            </GameProvider>
           </ToasterProvider>
         </body>
     </html>
