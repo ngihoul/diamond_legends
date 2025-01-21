@@ -11,6 +11,12 @@
         display: flex;
         align-items: center;
         height: var(--bar-height);
+
+        a {
+            align-self:last baseline;
+            padding-bottom: 0.8rem;
+            margin-left: 0.8rem;
+        }
     }
 
     ul li {
