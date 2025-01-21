@@ -8,11 +8,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import './page.css';
+import Button from "@/app/_components/Button/Button";
+import { useGame } from "@/lib/contexts/gameContext";
+import { useRouter } from "next/navigation";
 
 export default function Load() {
     const [teams, setTeams] = useState([]);
+
     const { userId } = useAuth();
     const { showToast } = useToaster();
+    const { changeTeam } = useGame();
+
+    const router = useRouter();
 
     useEffect(() => {
         console.log(userId);
@@ -27,6 +34,11 @@ export default function Load() {
             });
         }
     }, [userId]);
+
+    const loadGame = (teamId: number) => {
+        changeTeam(teamId);
+        router.push('/game/dashboard');
+    }
 
     return (
         <div>
@@ -48,7 +60,7 @@ export default function Load() {
                                         <td>{team.name}</td>
                                         <td>{team.season}</td>
                                         <td>
-                                            <Link className="btn" href={`/game/${team.id}/dashboard`}>Charger</Link>
+                                            <Button className="btn" action={() => loadGame(team.id)}>Charger</Button>
                                         </td>
                                     </tr>
                                 );
