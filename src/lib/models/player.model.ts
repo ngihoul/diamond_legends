@@ -51,3 +51,15 @@ export enum HandedType {
     "R" = 0,
     "L" = 1
 }
+
+export interface BattingSkills {
+    contact: number;
+    power: number;
+    running: number;
+    // defense: number;
+    // mental: number;
+    // stamina: number;
+    // control: number;
+    // velocity: number;
+    // movement: number;
+}

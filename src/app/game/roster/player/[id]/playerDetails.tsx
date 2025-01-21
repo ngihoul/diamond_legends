@@ -1,16 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HandedType, Player, PositionType } from "@/lib/models/player.model";
+import { Player, PositionType, HandedType } from "@/lib/models/player.model";
 import { getPlayer } from "@/lib/services/player";
 import { useToaster } from "@/lib/contexts/toasterContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import moment from "moment";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Radar } from "react-chartjs-2";
+
+import './page.css';
+
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 export default function PlayerDetails({ playerId }: { playerId: number }) {
   const [player, setPlayer] = useState<Player | null>(null);
-
   const { showToast } = useToaster();
   const router = useRouter();
 
@@ -20,64 +33,136 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
         const fetchedPlayer = await getPlayer(playerId);
         setPlayer(fetchedPlayer);
       } catch (error) {
-        showToast((error as Error).message, 'error');
-        router.push('/game/roster');
+        showToast((error as Error).message, "error");
+        router.push("/game/roster");
       }
     }
-
     fetchPlayer();
   }, [playerId]);
+
+  const createRadarData = (skills: Record<string, number>, colors: string[]) => ({
+    labels: Object.keys(skills),
+    datasets: [
+      {
+        label: "Skills",
+        data: Object.values(skills),
+        backgroundColor: colors[0],
+        borderColor: colors[1],
+        borderWidth: 1,
+      },
+    ],
+  });
 
   if (!player) {
     return <div>Chargement des données du joueur...</div>;
   }
 
+  const battingSkills = createRadarData({
+    Contact: player.contact,
+    Power: player.power,
+    Running: player.running,
+  }, [ "rgba(182, 6, 42, 0.2)", "rgba(182, 6, 42, 1)"]);
+
+  const defenseSkills = createRadarData({
+    Defense: player.defense,
+    Mental: player.mental,
+    Stamina: player.stamina,
+  }, ["rgba(3, 29, 113, 0.2)", "rgba(3, 29, 113, 1)"]);
+
+  const pitchingSkills = createRadarData({
+    Control: player.control,
+    Velocity: player.velocity,
+    Movement: player.movement,
+  }, ["rgba(16, 81, 50, 0.2)", "rgba(16, 81, 50, 1)"]);
+
   return (
     <div className="player-profile-container">
         <div className="heading-left">
             <h2>
-                {player.lastname} {player.firstname} 
-                <Image src={`/img/flags/${player.nationality.alpha2}.png`} alt={player.nationality.alpha2} width={30} height={20} />
+                <Image
+                    src={`/img/flags/${player.nationality.alpha2}.png`}
+                    alt={player.nationality.alpha2}
+                    width={30}
+                    height={20}
+                /> 
+                {player.lastname} {player.firstname}
             </h2>
         </div>
         <div className="data">
-            <ul>
-                <li>Date de naissance : {moment(player.dateOfBirth).format('DD/MM/YYYY')}</li>
-                <li>Lance : {HandedType[player.throw]}</li>
-                <li>Frappe : {HandedType[player.bat]}</li>
-                <li>Salaire : ${player.salary.toFixed(2)}</li>
-            </ul>
+            <div className="section generic-data">
+                <ul>
+                    <li><span className="label">Date de naissance : </span> {moment(player.dateOfBirth).format("DD/MM/YYYY")}</li>
+                    <li><span className="label">Lance : </span> {HandedType[player.throw]}</li>
+                    <li><span className="label">Frappe : </span> {HandedType[player.bat]}</li>
+                    <li><span className="label">Salaire : </span> ${player.salary.toFixed(2)}</li>
+                </ul>
+            </div>
+            <div className="section in-game">
+                <ul>
+                    <li><span className="label">Equipe : </span> </li>
+                    <li>
+                        <span className="label">Position{player.positions.length > 1 ? "s" : ""} :</span> {player.positions.map((pos) => PositionType[pos]).join(", ")}
+                    </li>
+                    <li><span className="label">Energie : </span> {player.energy} / 100</li>
+                </ul>
+            </div>
         </div>
-        <div className="in-game">
-            <ul>
-                <li>Position{ player.positions.length > 1 ? 's' : ''} : {player.positions.map((pos) => PositionType[pos]).join(', ')}</li>
-                <li>Énergie : {player.energy} / 100</li>
-            </ul>
+      {/* TODO : créer un composant */}
+        <div className="skills">
+            <div className="section skills-section batting-skills">
+                <h3>Batting skills</h3>
+                <ul>
+                    <li className={ player.contact > 80 ? "high" : "" }>
+                        <span className="label">Contact : </span> {player.contact}
+                    </li>
+                    <li className={ player.power > 80 ? "high" : "" }>
+                        <span className="label">Puissance : </span> {player.power}
+                    </li>
+                    <li className={ player.running > 80 ? "high" : "" }>
+                        <span className="label">Course : </span> {player.running}
+                    </li>
+                </ul>
+                <div className="graph batting-skills-graph">
+
+                    <Radar data={battingSkills} />
+                </div>
+            </div>
+            <div className="section skills-section defense-skills">
+                <h3>Defense skills</h3>
+                <ul>
+                    <li className={ player.defense > 80 ? "high" : "" }>
+                        <span className="label">Défense : </span> {player.defense}
+                    </li>
+                    <li className={ player.mental > 80 ? "high" : "" }>
+                        <span className="label">Mental : </span> {player.mental}
+                    </li>
+                    <li className={ player.stamina > 80 ? "high" : "" }>
+                        <span className="label">Endurance : </span> {player.stamina}
+                    </li>
+                </ul>
+                <div className="graph defense-skills-graph">
+                    <Radar data={defenseSkills} />
+                </div>
+            </div>
+            <div className="section skills-section pitching-skills">
+                <h3>Pitching skills</h3>
+                <ul>
+                    <li className={ player.control > 80 ? "high" : "" }>
+                        <span className="label">Contrôle :</span>{player.control}
+                    </li>
+                    <li className={ player.velocity > 80 ? "high" : "" }>
+                        <span className="label">Vitesse :</span> {player.velocity}
+                    </li>
+                    <li className={ player.movement > 80 ? "high" : "" }>
+                        <span className="label">Mouvement :</span> {player.movement}
+                    </li>
+                </ul>
+                <div className="graph pitching-skills-graph">
+                    <Radar data={pitchingSkills} />
+                </div>
+            </div>
         </div>
-        <div className="batting-skills">
-            <h3>Batting skills</h3>
-            <ul>
-                <li>Contact: {player.contact}</li>
-                <li>Puissance: {player.power}</li>
-                <li>Course: {player.running}</li>
-            </ul>
-        </div>
-        <div className="defense-skills">
-            <h3>Defense skills</h3>
-            <ul>
-                <li>Défence : {player.defense}</li>
-                <li>Mental : {player.mental}</li>
-                <li>Endurance : {player.stamina}</li>
-            </ul>
-        </div>
-        <div className="pitching-skills">
-            <h3>Pitching skills</h3>
-            <ul>
-                <li>Contrôle : {player.control}</li>
-                <li>Vitesse : {player.velocity}</li>
-                <li>Mouvement : {player.movement}</li>
-            </ul>
-        </div>
+      
     </div>
   );
 }
