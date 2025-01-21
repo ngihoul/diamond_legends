@@ -73,14 +73,19 @@ export default function Load() {
                     </table>
                 </div>
             )}
-            <div>
-                <div className="heading">
-                    <h2>Lance une nouvelle partie</h2>
-                    <p className="subtitle">Enfile ta vareuse et playball !</p>
+
+            { teams.length === 0 && (
+                <div>
+                    <div className="heading">
+                        <h2>Lance une nouvelle partie</h2>
+                        <p className="subtitle">Enfile ta vareuse et playball !</p>
+                    </div>
+                    
+                    
                 </div>
-                
-                <Link className="btn" href={'/game/new'}>Nouvelle partie</Link>
-            </div>
+            )}
+            
+            <Link className="btn" href={'/game/new'}>Nouvelle partie</Link>
         </div>
     );
 }
