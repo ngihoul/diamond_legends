@@ -4,9 +4,7 @@ import "./globals.css";
 import Header from "./_components/Layout/Header/Header";
 import NavBar from "./_components/Layout/NavBar/NavBar";
 import Toaster from "./_components/Toaster/Toaster";
-import { AuthProvider } from "@/lib/contexts/authContext";
-import { ToasterProvider } from "@/lib/contexts/toasterContext";
-import { GameProvider } from "@/lib/contexts/gameContext";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,29 +29,23 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        {/* TODO: import font as explained in docs */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playwrite+IN:wght@100..400&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playwrite+IN:wght@100..400&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <ToasterProvider>
-            <GameProvider>
-              <AuthProvider>
-              
-                <Header />
-                <NavBar />
-                <main className="main">
-                  <Toaster />
-                  <div className="wrapper">
-                    {children}
-                  </div>
-                </main>
-              </AuthProvider>
-            </GameProvider>
-          </ToasterProvider>
-        </body>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Providers>
+          <Header />
+          <NavBar />
+          <main className="main">
+            <Toaster />
+            <div className="wrapper">{children}</div>
+          </main>
+        </Providers>
+      </body>
     </html>
   );
 }

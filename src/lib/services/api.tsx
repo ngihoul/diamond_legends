@@ -1,6 +1,4 @@
 import axios from "axios";
-import Router from "next/router";
-
 import { API_URL } from "../../../config";
 import { Payload } from "../models/auth.model";
 import { jwtDecode } from "jwt-decode";
@@ -19,7 +17,6 @@ apiClient.interceptors.request.use(
         if(isTokenValid(token)) {
             config.headers.Authorization = `Bearer ${token}`
         }
-
         return config;
     },
     (error) => {
@@ -31,22 +28,20 @@ apiClient.interceptors.response.use(
     (response) => {
         return response;
     },
-
     async (error) => {
         if(error.response) {
-            if(error.response.status === 401) {
-                Router.push('/auth/signin');
-                throw new Error('Vous devez vous identifier');
-            } else if(error.response.status === 500) {
-                Router.push('/');
-                throw new Error('Erreur serveur. Veuillez réessayer.');
-            } else {
-                throw new Error(error.response.data);
-            }
+            // if(error.response.status === 401) {
+            //     throw new Error('Vous devez vous identifier');
+            // } else if(error.response.status === 500) {
+            //     throw new Error('Erreur serveur. Veuillez réessayer.');
+            // } else {
+            //     const errorMessage = error.response.data.message || error.response.data;
+            //     throw new Error(errorMessage);
+            // }
+            const errorMessage = error.response.data.message || error.response.data;
+            throw new Error(errorMessage);
         }
-        else {
-            return Promise.reject(error);
-        }
+        return Promise.reject(error);
     }
 );
 

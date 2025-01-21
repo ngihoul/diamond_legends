@@ -1,5 +1,4 @@
 'use client';
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContextType, AuthProviderProps, Payload, SignInFormValues, SignUpFormValues } from "../models/auth.model";
 import apiClient from "../services/api";
@@ -20,80 +19,70 @@ export const useAuth = () => {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const token = getToken();
-    const initialUserId = token && isTokenValid(token) ? getUserId(token) : null;
-
-    const [userId, setUserId] = useState<string | null>(initialUserId);
+    const [token, setToken] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
     const { showToast } = useToaster();
     const { changeTeam } = useGame();
     const router = useRouter();
 
     useEffect(() => {
-        const token = getToken();
-        if(isTokenValid(token)) {
-            setUserId(getUserId(token));
+        const storedToken = window.localStorage.getItem('token');
+        if (storedToken && isTokenValid(storedToken)) {
+            setToken(storedToken);
+            setUserId(getUserId(storedToken));
         } else {
-            removeToken();
+            window.localStorage.removeItem('token');
+            setToken(null);
             setUserId(null);
             router.push('/');
         }
     }, []);
 
     const login = async (values: SignInFormValues) => {
-        await apiClient.post('/auth/login', values)
-            .then((response) => {
-                saveToken(response.data);
-                const userId = getUserId(response.data);
-                setUserId(userId);
-                console.log(userId);
-                showToast(`Connexion réussie !`, 'success');
-                router.push('/game/load');
-            })
-            .catch((error: Error) => {
-                handleError(error, showToast);
-            });
+        try {
+            const response = await apiClient.post('/auth/login', values);
+            const newToken = response.data;
+            window.localStorage.setItem('token', newToken);
+            
+            const newUserId = getUserId(newToken);
+            setUserId(newUserId);
+            
+            showToast('Connexion réussie !', 'success');
+            router.push('/game/load');
+        } catch (error: any) {
+            const errorMessage = error.message || 'Une erreur est survenue';
+            showToast(errorMessage, 'error');
+            
+            // Gestion des redirections ici si nécessaire
+            if (error.response?.status === 401) {
+                router.push('/auth/signin');
+            }
+        }
     };
 
     const register = async (values: SignUpFormValues) => {
-        await apiClient.post('/auth/register', values)
-            .then(
-                () => {
-                    showToast(`Inscription réussie !`, 'success');
-                    router.push('/');
-                }
-            )
-            .catch((error: Error) => {
-                handleError(error, showToast);
-            });
+        try {
+            await apiClient.post('/auth/register', values);
+            showToast('Inscription réussie !', 'success');
+            router.push('/');
+        } catch (error) {
+            handleError(error as Error, showToast);
+        }
     };
 
     const logout = async () => {
-        removeToken();
+        window.localStorage.removeItem('token');
+        setToken(null);
         setUserId(null);
         changeTeam(null);
+        router.push('/');
     };
 
     return (
-        <AuthContext.Provider value={{ userId, login, register, logout}}>
-            { children }
+        <AuthContext.Provider value={{ token, userId, login, register, logout }}>
+            {children}
         </AuthContext.Provider>
     );
-}
-
-
-const saveToken = (token: string): void => {
-    window.localStorage.setItem('token', token);
-}
-
-const getToken = (): string | null => {
-    // QUESTION : ReferenceError: localStorage is not defined
-
-    return window.localStorage.getItem('token');
-
-}
-
-const removeToken = (): void => {
-    window.localStorage.removeItem('token');
 }
 
 const isTokenValid = (token: string | null): boolean => {
@@ -109,20 +98,10 @@ const getUserId = (token: string | null): string | null => {
         return null;
     }
     const decoded: Payload = jwtDecode(token);
-    return decoded.Id
+    return decoded.Id;
 }
 
-// const getUser = async (token: string): Promise<User | null> => {
-//     if (isTokenValid(token)) {
-//         const decoded: Payload = jwtDecode(token);
-//         const response = await apiClient.get(`/users/${decoded.Id}`);
-//         return response.data;
-//     } else {
-//         return null;
-//     }
-// }
-
-const handleError = (error: Error, showToast : (message: string, type: ToastType) => void): void => {
+const handleError = (error: Error, showToast: (message: string, type: ToastType) => void): void => {
     const errorMessage = error.message || 'Erreur inconnue';
     showToast(`Erreur : ${errorMessage}`, 'error');
 }

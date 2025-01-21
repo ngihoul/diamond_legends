@@ -15,6 +15,7 @@ export interface SignUpFormValues {
 }
 
 export interface AuthContextType {
+    token: string | null;
     userId: string | null;
     login: (values: SignInFormValues) => Promise<void>;
     register: (values: SignUpFormValues) => Promise<void>;
