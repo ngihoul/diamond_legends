@@ -33,6 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         } else {
             window.localStorage.removeItem('token');
             setToken(null);
+            changeTeam(null);
             setUserId(null);
             router.push('/');
         }
