@@ -57,7 +57,7 @@ export default function SignUp() {
           validationSchema={registerSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isValid, isSubmitting }) => (
             <Form className="signup-form">
               <div className="form-control">
                 <label htmlFor="username">Nom d&apos;utilisateur</label>
@@ -113,7 +113,7 @@ export default function SignUp() {
                 <ErrorMessage name="nationalityIdString" component="div" className="error" />
               </div>
               {/* TODO : create a custom LoadingSpinner */}
-              <button type="submit" disabled={isSubmitting}>
+              <button type="submit" disabled={ isSubmitting || !isValid }>
                 {isSubmitting ? 'Chargement...' : 'S\'inscrire'}
               </button>
             </Form>

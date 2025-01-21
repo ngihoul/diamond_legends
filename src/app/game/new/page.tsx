@@ -66,7 +66,7 @@ export default function New() {
                 validationSchema={TeamCreationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ values, handleChange, isSubmitting}) => (
+                {({ values, handleChange, isValid, isSubmitting}) => (
                     <Form className="team-form">
                         <div className="form-control">
                             <label htmlFor="name">Nom de l&apos;équipe</label>
@@ -125,7 +125,7 @@ export default function New() {
                         </div>
 
                         {/* TODO : create a custom LoadingSpinner */}
-                        <button type="submit" disabled={isSubmitting}>
+                        <button type="submit" disabled={isSubmitting || !isValid }>
                             {isSubmitting ? 'Chargement...' : 'Créer son équipe'}
                         </button>
                     </Form>

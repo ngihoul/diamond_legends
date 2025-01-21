@@ -233,15 +233,15 @@ button[type="submit"]:hover {
 }
 
 button[type="submit"]:disabled {
-  background-color: var(--color-bg-light-disabled);
-  color: var(--color-text-disabled); 
-  border: 2px solid var(--color-border-disabled); 
+  background-color: var(--color-bg-light);
+  color: var(--color-border); 
+  border: 2px solid var(--color-border); 
   cursor: not-allowed; 
 }
 
 button[type="submit"]:disabled:hover {
-  background-color: var(--color-bg-light-disabled);
-  color: var(--color-text-disabled);
+  background-color: var(--color-bg-light);
+  color: var(--color-border);
 }
 
 /* ### Table ### */

@@ -26,7 +26,7 @@ export default function SignIn() {
                 validationSchema={LoginSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isSubmitting }) => (
+                {({ isValid, isSubmitting }) => (
                     <Form className="signin-form">
                         <div className="form-control">
                             <label htmlFor="emailOrUsername">Email ou nom d&apos;utilisateur</label>
@@ -46,7 +46,7 @@ export default function SignIn() {
                             />
                             <ErrorMessage name="password" component="div" className="error" />
                         </div>
-                        <button className="btn" type="submit" disabled={isSubmitting}>
+                        <button className="btn" type="submit" disabled={isSubmitting || !isValid }>
                             {isSubmitting ? 'Chargement...' : 'S\'inscrire'}
                         </button>
                     </Form>
