@@ -37,3 +37,8 @@ export interface UniformValues {
     tertiaryColor?: string;
     teamName?: string;
 }
+
+export interface TeamViewPlayer {
+    id: number;
+    name: string;
+}

@@ -101,6 +101,15 @@ a {
   }
 }
 
+.breadcrumb {
+  margin-bottom: 1.6rem;
+
+  a {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+  }
+}
+
 /* ### Form ### */
 
 form {

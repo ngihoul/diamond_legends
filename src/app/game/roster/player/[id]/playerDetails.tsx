@@ -19,6 +19,7 @@ import {
 import { Radar } from "react-chartjs-2";
 
 import './page.css';
+import Link from "next/link";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -44,7 +45,6 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
     labels: Object.keys(skills),
     datasets: [
       {
-        label: "Skills",
         data: Object.values(skills),
         backgroundColor: colors[0],
         borderColor: colors[1],
@@ -77,6 +77,9 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
 
   return (
     <div className="player-profile-container">
+      <div className="breadcrumb">
+        <Link href={'/game/roster'}>← Retour vers le roster</Link>
+      </div>
         <div className="heading-left">
             <h2>
                 <Image
@@ -85,7 +88,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
                     width={30}
                     height={20}
                 /> 
-                {player.lastname} {player.firstname}
+                {player.lastname} <span className="firstname">{player.firstname}</span>
             </h2>
         </div>
         <div className="data">
@@ -99,7 +102,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
             </div>
             <div className="section in-game">
                 <ul>
-                    <li><span className="label">Equipe : </span> </li>
+                    <li><span className="label">Equipe :</span> <Link className="link" href={`/game/team/${player.team.id}`}>{player.team.name}</Link></li>
                     <li>
                         <span className="label">Position{player.positions.length > 1 ? "s" : ""} :</span> {player.positions.map((pos) => PositionType[pos]).join(", ")}
                     </li>
@@ -107,38 +110,24 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
                 </ul>
             </div>
         </div>
-      {/* TODO : créer un composant */}
         <div className="skills">
             <div className="section skills-section batting-skills">
                 <h3>Batting skills</h3>
                 <ul>
-                    <li className={ player.contact > 80 ? "high" : "" }>
-                        <span className="label">Contact : </span> {player.contact}
-                    </li>
-                    <li className={ player.power > 80 ? "high" : "" }>
-                        <span className="label">Puissance : </span> {player.power}
-                    </li>
-                    <li className={ player.running > 80 ? "high" : "" }>
-                        <span className="label">Course : </span> {player.running}
-                    </li>
+                    <SkillItem label="Contact" skill={player.contact} />
+                    <SkillItem label="Puissance" skill={player.power} />
+                    <SkillItem label="Course" skill={player.running} />
                 </ul>
                 <div className="graph batting-skills-graph">
-
                     <Radar data={battingSkills} />
                 </div>
             </div>
             <div className="section skills-section defense-skills">
                 <h3>Defense skills</h3>
                 <ul>
-                    <li className={ player.defense > 80 ? "high" : "" }>
-                        <span className="label">Défense : </span> {player.defense}
-                    </li>
-                    <li className={ player.mental > 80 ? "high" : "" }>
-                        <span className="label">Mental : </span> {player.mental}
-                    </li>
-                    <li className={ player.stamina > 80 ? "high" : "" }>
-                        <span className="label">Endurance : </span> {player.stamina}
-                    </li>
+                  <SkillItem label="Défense" skill={player.defense} />
+                  <SkillItem label="Mental" skill={player.mental} />
+                  <SkillItem label="Endurance" skill={player.stamina} />
                 </ul>
                 <div className="graph defense-skills-graph">
                     <Radar data={defenseSkills} />
@@ -147,22 +136,27 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
             <div className="section skills-section pitching-skills">
                 <h3>Pitching skills</h3>
                 <ul>
-                    <li className={ player.control > 80 ? "high" : "" }>
-                        <span className="label">Contrôle :</span>{player.control}
-                    </li>
-                    <li className={ player.velocity > 80 ? "high" : "" }>
-                        <span className="label">Vitesse :</span> {player.velocity}
-                    </li>
-                    <li className={ player.movement > 80 ? "high" : "" }>
-                        <span className="label">Mouvement :</span> {player.movement}
-                    </li>
+                  <SkillItem label="Contrôle" skill={player.control} />
+                  <SkillItem label="Vitesse" skill={player.velocity} />
+                  <SkillItem label="Mouvement" skill={player.movement} />
                 </ul>
                 <div className="graph pitching-skills-graph">
                     <Radar data={pitchingSkills} />
                 </div>
             </div>
         </div>
-      
     </div>
   );
+}
+
+export const SkillItem = ({ label, skill }: { label: string, skill: number }) => {
+  const isHighSkill = (skill: number): string => {
+    return skill >= 80 ? "high" : skill <= 40 ? "low" : "";
+  }
+
+  return(
+    <li className={ isHighSkill(skill) }>
+        <span className="label">{label} : </span> {skill}
+    </li>
+  )
 }

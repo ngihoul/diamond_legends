@@ -70,7 +70,7 @@ export default function Roster() {
                     </tbody>
                 </table>
             ) : (
-                <p>Aucun joueur dans votre équipe</p>
+                <p>Chargement des joueurs ...</p>
             )}
         </div>
     );

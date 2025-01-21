@@ -1,4 +1,5 @@
 import { Country } from "./country.model";
+import { TeamViewPlayer } from "./team.model";
 
 export interface Player {
     id: number;
@@ -7,6 +8,7 @@ export interface Player {
     dateOfBirth: Date;
     nationality: Country;
     positions: PositionType[];
+    team: TeamViewPlayer;
     throw: HandedType;
     bat: HandedType;
     salary: number;
