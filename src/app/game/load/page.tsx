@@ -41,10 +41,14 @@ export default function Load() {
     }
 
     return (
-        <div>
+        <div className="load-game">
             {teams.length > 0 && (
                 <div>
-                    <h2>Choisir une partie</h2>
+                    <div className="heading">
+                        <h2>Choisir une partie</h2>
+                        <p className="subtitle">Reprends la ou tu t&apos;étais arrêté !</p>
+                    </div>
+                    
                     <table className="table table-load">
                         <thead>
                             <tr>
@@ -70,6 +74,11 @@ export default function Load() {
                 </div>
             )}
             <div>
+                <div className="heading">
+                    <h2>Lance une nouvelle partie</h2>
+                    <p className="subtitle">Enfile ta vareuse et playball !</p>
+                </div>
+                
                 <Link className="btn" href={'/game/new'}>Nouvelle partie</Link>
             </div>
         </div>
