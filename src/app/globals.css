@@ -61,6 +61,21 @@ h2 {
   margin-bottom: 0.2rem;
 }
 
+.heading {
+  text-align: center;
+  padding-bottom: 1.6rem;
+
+  h2 {
+      padding: 0.8rem;
+  }
+}
+
+.heading-left {
+  h2 {
+    padding-bottom: 1.6rem;
+  }
+}
+
 .subtitle {
   font-size: 1.3rem;
   letter-spacing: 0.1rem;
@@ -92,21 +107,24 @@ a {
   padding: var(--bar-height);
 }
 
-.heading {
-  text-align: center;
-  padding-bottom: 1.6rem;
-
-  h2 {
-      padding: 0.8rem;
-  }
-}
-
 .breadcrumb {
   margin-bottom: 1.6rem;
 
   a {
     font-size: 0.9rem;
     color: var(--color-secondary);
+  }
+}
+
+.link {
+  color: var(--color-secondary);
+
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: var(--color-primary);
+
+    transition: color 0.5s ease;
   }
 }
 

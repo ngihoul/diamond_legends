@@ -39,7 +39,7 @@ export default function LeagueDetails({ leagueId } : { leagueId : number}) {
                         {league.teams?.map((team) => (
                             <tr key={team.id}>
                                 <td>
-                                    <Link href={`/game/roster/${team.id}`}>
+                                    <Link className="link" href={`/game/roster/${team.id}`}>
                                         { team.id == teamSelected ? <b>{team.name}</b> : team.name}
                                     </Link>
                                 </td>

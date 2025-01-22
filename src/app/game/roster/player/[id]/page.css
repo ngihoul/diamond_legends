@@ -1,7 +1,5 @@
 .player-profile-container {
     h2 {
-        margin-bottom: 1.6rem;
-
         img {
             margin-right: 0.8rem;
         }
@@ -72,10 +70,6 @@
             background-color: var(--color-error-bg);
             color: var(--color-error-text);
             border: 1px solid var(--color-error-border);
-        }
-
-        .link {
-            color: var(--color-secondary);
         }
     }
 
