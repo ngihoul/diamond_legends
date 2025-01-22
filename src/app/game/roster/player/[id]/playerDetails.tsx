@@ -150,13 +150,13 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
 }
 
 export const SkillItem = ({ label, skill }: { label: string, skill: number }) => {
-  const isHighSkill = (skill: number): string => {
+  const isHighOrLow = (skill: number): string => {
     return skill >= 80 ? "high" : skill <= 40 ? "low" : "";
   }
 
   return(
-    <li className={ isHighSkill(skill) }>
+    <li className={ isHighOrLow(skill) }>
         <span className="label">{label} : </span> {skill}
     </li>
-  )
+  );
 }
