@@ -39,9 +39,9 @@
         - 2 CL
     - BONUS : 50 joueurs "Free Agent" sont créés en plus - possible à échanger
 
-5. L'utilisateur peut consulter 
+5. L'utilisateur peut consulter  [v]
     - son roster (équipe de 25 joueurs) [v]
-    - les autres rosters
+    - les autres rosters [v]
 
 6. L'utilisateur peut consulter le calendrier des matchs de la saison en cours
     - Les matchs sont créés au lancement de la saison
