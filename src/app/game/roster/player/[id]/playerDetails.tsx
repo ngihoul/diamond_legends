@@ -83,6 +83,20 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
     Movement: player.movement,
   }, ["rgba(16, 81, 50, 0.2)", "rgba(16, 81, 50, 1)"]);
 
+  const age = (dateOfBirth: Date) => {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
+  }
+
   return (
     <div className="player-profile-container">
       <div className="breadcrumb">
@@ -102,7 +116,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
         <div className="data">
             <div className="section generic-data">
                 <ul>
-                    <li><span className="label">Date de naissance : </span> {moment(player.dateOfBirth).format("DD/MM/YYYY")}</li>
+                    <li><span className="label">Date de naissance : </span> {moment(player.dateOfBirth).format("DD/MM/YYYY")} - {age(player.dateOfBirth)} ans</li>
                     <li><span className="label">Lance : </span> {HandedType[player.throw]}</li>
                     <li><span className="label">Frappe : </span> {HandedType[player.bat]}</li>
                     <li><span className="label">Salaire : </span> ${player.salary.toFixed(2)}</li>
