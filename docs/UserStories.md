@@ -9,21 +9,21 @@
 2. L'utilisateur peut se connecter [v]
     - BONUS : Protection contre les attaques DDoS
 
-3. L'utilisateur peut créer une équipe  
-    1. Choisir le nom de l'équipe
-    2. Choisir la ville et le pays de l'équipe
-        - Select pour le choix du pays
-    3. Le logo de l'équipe (facultatif)
+3. L'utilisateur peut créer une équipe  [v]
+    1. Choisir le nom de l'équipe [v]
+    2. Choisir la ville et le pays de l'équipe [v]
+        - Select pour le choix du pays [v]
+    3. BONUS : Le logo de l'équipe (facultatif)
         - Sauvegarde du chemin
         - Prévisualisation
         - logos de base proposés (demandé à une IA)
-    4. Les couleurs de l'uniforme (primaire, secondaire, tertiaire)
-        - Aperçu en direct
+    4. Les couleurs de l'uniforme (primaire, secondaire, tertiaire) [v]
+        - Aperçu en direct [v]
 
-4. L'utilisateur peut lancer une partie solo
-    - Une league se composée de 6 équipes [v]
+4. L'utilisateur peut lancer une partie solo [v]
+    - Une league se composée de 8 équipes [v]
     - Le nom de la league est généré automatiquement [v]
-    - Les 5 équipes adverses sont générés automatiquement et sont liées à l'utilisateur "BOT" [v]
+    - Les 7 équipes adverses sont générés automatiquement et sont liées à l'utilisateur "BOT" [v]
     - Les rosters sont générés automatiquement : [v]
         - 25 joueurs au total
         - 2 C
@@ -39,15 +39,17 @@
         - 2 CL
     - BONUS : 50 joueurs "Free Agent" sont créés en plus - possible à échanger
 
-5. L'utilisateur peut consulter son roster (équipe de 25 joueurs) et les autres rosters
+5. L'utilisateur peut consulter 
+    - son roster (équipe de 25 joueurs) [v]
+    - les autres rosters
 
-6. L'utilisateur peut avancer d'un jour dans la saison
-    - Lorsqu'on arrive à la fin d'une saison, la nouvelle saison est créée
-
-7. L'utilisateur peut consulter le calendrier des matchs de la saison en cours
+6. L'utilisateur peut consulter le calendrier des matchs de la saison en cours
     - Les matchs sont créés au lancement de la saison
 
-8. L'utilisateur peut créer son line-up (9 joueurs en défense, 1 releveur et 1 closer)
+7. L'utilisateur peut avancer d'un jour dans la saison
+    - Lorsqu'on arrive à la fin d'une saison, la nouvelle saison est créée
+
+8. L'utilisateur peut créer son line-up (9 joueurs en défense, 1 releveur et 1 closer) en pre-game
 
 9. L'utilisateur peut jouer (= simuler) un match
 

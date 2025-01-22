@@ -50,7 +50,7 @@ export default function NavBar() {
                                 <Link href={'/game/dashboard'}>Dashboard</Link>
                             </li>
                             <li>
-                                <Link href={'/game/roster'}>Roster</Link>
+                                <Link href={`/game/roster/${teamSelected}`}>Roster</Link>
                             </li>
                             <li>
                                 <Link href={`/game/league/${team.league.id}`}>League</Link>

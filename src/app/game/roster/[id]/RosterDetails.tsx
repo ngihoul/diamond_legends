@@ -10,15 +10,13 @@ import { useEffect, useState } from "react";
 import './page.css';
 import Link from "next/link";
 
-export default function Roster() {
+export default function RosterDetails({ teamId } : { teamId: number }) {
     const [team, setTeam] = useState({} as Team);
-
-    const { teamSelected } = useGame();
 
     useEffect(() => {
         const fetchTeam = async () => {
+            const response = await getTeam(teamId);
             // QUESTION : Pourquoi useEffect s'exécute 2 fois ?
-            const response = await getTeam(teamSelected!);
             console.log('Roster page - useEffect : excuté');
             setTeam(response);
         }
@@ -29,7 +27,9 @@ export default function Roster() {
     return (
         <div className="roster-container">
             <div className="heading-left">
-                <h2>Roster</h2>
+                <h2>
+                    {team.name} {team.city} Roster
+                </h2>
             </div>
             { team.players && team.players.length > 0 ? (
                 <table className="roster-table">

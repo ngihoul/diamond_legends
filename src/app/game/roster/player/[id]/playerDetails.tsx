@@ -51,6 +51,14 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
         borderWidth: 1,
       },
     ],
+    options: {
+      scales: {
+        r: {
+          suggestedMin: 0,
+          suggestedMax: 100
+        }
+      }
+    }
   });
 
   if (!player) {
@@ -78,7 +86,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
   return (
     <div className="player-profile-container">
       <div className="breadcrumb">
-        <Link href={'/game/roster'}>← Retour vers le roster</Link>
+        <Link href={`/game/roster/${player.team.id}`}>← Retour vers le roster</Link>
       </div>
         <div className="heading-left">
             <h2>
