@@ -7,10 +7,27 @@ import { useGame } from '@/lib/contexts/gameContext';
 import Image from 'next/image';
 
 import ball from '@/public/img/ball_without_bg.png';
+import { useEffect, useState } from 'react';
+import { Team } from '@/lib/models/team.model';
+import { getTeam } from '@/lib/services/team';
 
 export default function NavBar() {
+    const [team, setTeam] = useState<Team | null>(null);
+
     const { userId } = useAuth();
     const { teamSelected } = useGame();
+
+    useEffect(() => {
+        const fetchTeam = async () => {
+            if(teamSelected === null) return;
+            
+            const response = await getTeam(teamSelected!);
+            console.log(response);
+            setTeam(response);
+        };
+
+        fetchTeam();
+    }, [teamSelected]);
 
     return (
         // TODO : create navbar when not authenticated
@@ -27,7 +44,7 @@ export default function NavBar() {
                         <Link className="nav-text" href={'/auth/signup'}>Rejoins le Hall of Fame, inscris-toi !</Link>
                     )}
 
-                    {teamSelected && (
+                    {teamSelected && team && (
                         <ul>
                             <li>
                                 <Link href={'/game/dashboard'}>Dashboard</Link>
@@ -35,7 +52,9 @@ export default function NavBar() {
                             <li>
                                 <Link href={'/game/roster'}>Roster</Link>
                             </li>
-                            <li><a href="#">League</a></li>
+                            <li>
+                                <Link href={`/game/league/${team.league.id}`}>League</Link>
+                            </li>
                             <li><a href="#">Stats</a></li>
                         </ul>
                     )}
