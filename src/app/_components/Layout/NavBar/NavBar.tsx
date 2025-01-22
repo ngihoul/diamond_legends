@@ -49,11 +49,12 @@ export default function NavBar() {
                             <li>
                                 <Link href={'/game/dashboard'}>Dashboard</Link>
                             </li>
+                            <li><a href="#">Calendrier</a></li>
                             <li>
-                                <Link href={`/game/roster/${teamSelected}`}>Roster</Link>
+                                <Link href={`/game/roster/${teamSelected}`}>Equipe</Link>
                             </li>
                             <li>
-                                <Link href={`/game/league/${team.league.id}`}>League</Link>
+                                <Link href={`/game/league/${team.league.id}`}>Ligue</Link>
                             </li>
                             <li><a href="#">Stats</a></li>
                         </ul>
