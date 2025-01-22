@@ -47,7 +47,7 @@
     - Les matchs sont créés au lancement de la saison
 
 7. L'utilisateur peut avancer d'un jour dans la saison
-    - Lorsqu'on arrive à la fin d'une saison, la nouvelle saison est créée
+    - Lorsqu'on arrive à la fin d'une saison, la nouvelle saison est créée   
 
 8. L'utilisateur peut créer son line-up (9 joueurs en défense, 1 releveur et 1 closer) en pre-game
 
