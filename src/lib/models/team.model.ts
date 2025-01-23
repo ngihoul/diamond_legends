@@ -43,4 +43,5 @@ export interface UniformValues {
 export interface TeamViewPlayer {
     id: number;
     name: string;
+    abbreviation: string;
 }
