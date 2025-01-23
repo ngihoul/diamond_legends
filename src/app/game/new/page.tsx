@@ -41,8 +41,6 @@ export default function New() {
     }, []);
 
     const handleSubmit = async (values: TeamCreationValues) => {
-        console.log("Clicked");
-        
         const formData = {
             ...values,
             countryId: parseInt(values.countryIdString),
@@ -105,7 +103,7 @@ export default function New() {
                                 onChange={handleChange}
                                 placeholder="Nom de l'équipe"
                             />
-                            <ErrorMessage name="name" component="div" className="error" />
+                            <ErrorMessage name="abbreviation" component="div" className="error" />
                         </div>
                         <div className="form-control">
                             <label htmlFor="name">Ville de l&apos;équipe</label>

@@ -126,7 +126,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
             </div>
             <div className="section in-game">
                 <ul>
-                    <li><span className="label">Equipe :</span> <Link className="link" href={`/game/team/${player.team.id}`}>{player.team.name}</Link></li>
+                    <li><span className="label">Equipe :</span> <Link className="link" href={`/game/team/${player.team.id}`}>{player.team.name} ({player.team.abbreviation.toUpperCase()})</Link></li>
                     <li>
                         <span className="label">Position{player.positions.length > 1 ? "s" : ""} :</span> {player.positions.map((pos) => PositionType[pos]).join(", ")}
                     </li>

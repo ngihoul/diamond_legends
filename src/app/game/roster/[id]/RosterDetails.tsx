@@ -1,6 +1,5 @@
 'use client';
 
-import { useGame } from "@/lib/contexts/gameContext";
 import { HandedType, Player, PositionType } from "@/lib/models/player.model";
 import { Team } from "@/lib/models/team.model";
 import { getTeam } from "@/lib/services/team";
@@ -28,7 +27,7 @@ export default function RosterDetails({ teamId } : { teamId: number }) {
         <div className="roster-container">
             <div className="heading-left">
                 <h2>
-                    {team.name} {team.city} Roster
+                    {team.name} {team.city} - Roster
                 </h2>
             </div>
             { team.players && team.players.length > 0 ? (

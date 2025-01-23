@@ -22,14 +22,12 @@ export default function Load() {
     const router = useRouter();
 
     useEffect(() => {
-        console.log(userId);
         if(userId) {
             apiClient.get(`/team/user`)
             .then((response) => {
                 setTeams(response.data);
             })
             .catch((error: Error) => {
-                console.log("Erreur depuis load");
                 showToast(error.message, 'error');
             });
         }

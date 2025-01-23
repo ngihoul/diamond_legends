@@ -22,7 +22,6 @@ export default function NavBar() {
             if(teamSelected === null) return;
             
             const response = await getTeam(teamSelected!);
-            console.log(response);
             setTeam(response);
         };
 
