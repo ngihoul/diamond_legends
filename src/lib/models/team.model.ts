@@ -6,6 +6,7 @@ import { User } from "./user.model";
 export interface Team {
     id: number;
     name: string;
+    abbreviation: string;
     owner: User;
     city: string;
     country: Country;
@@ -22,6 +23,7 @@ export interface Team {
 
 export interface TeamCreationValues {
     name: string;
+    abbreviation: string;
     city: string;
     countryIdString: string;
     countryId?: number;

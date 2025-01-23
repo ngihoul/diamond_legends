@@ -72,6 +72,7 @@ export default function New() {
             <Formik
                 initialValues={{
                     name: '',
+                    abbreviation: '',
                     city: '',
                     countryIdString: '',
                     logo: '',
@@ -96,7 +97,18 @@ export default function New() {
                             <ErrorMessage name="name" component="div" className="error" />
                         </div>
                         <div className="form-control">
-                        <label htmlFor="name">Ville de l&apos;équipe</label>
+                            <label htmlFor="abbreviation">Abréviation</label>
+                            <Field
+                                type="text"
+                                name="abbreviation"
+                                value={values.abbreviation}
+                                onChange={handleChange}
+                                placeholder="Nom de l'équipe"
+                            />
+                            <ErrorMessage name="name" component="div" className="error" />
+                        </div>
+                        <div className="form-control">
+                            <label htmlFor="name">Ville de l&apos;équipe</label>
                             <Field
                                 type="text"
                                 name="city"

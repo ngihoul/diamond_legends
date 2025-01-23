@@ -94,6 +94,8 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
       age--;
     }
 
+    // TODO : check les jours 
+
     return age;
   }
 

@@ -33,6 +33,10 @@ export const TeamCreationSchema = Yup.object().shape({
         .required('Le nom de l\'equipe est requis')
         .min(3, 'Le nom de l\'equipe doit contenir au moins 3 caractères')
         .max(120, 'Le nom de l\'equipe doit contenir au plus 120 caractères'),
+    abbreviation: Yup.string()
+        .required('L\'abreviation de l\'equipe est requise')
+        .min(2, 'L\'abreviation de l\'equipe doit contenir au moins 3 caractères')
+        .max(5, 'L\'abreviation de l\'equipe doit contenir au plus 5 caractères'),
     city: Yup.string()
         .required('La ville de l\'equipe est requise')
         .min(3, 'La ville de l\'equipe doit contenir au moins 3 caractères')
