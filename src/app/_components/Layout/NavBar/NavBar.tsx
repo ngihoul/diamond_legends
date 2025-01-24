@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { Team } from '@/lib/models/team.model';
 import { getTeam } from '@/lib/services/team';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays, faChartLine, faChartSimple, faHourglass, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faChartLine, faChartSimple, faForwardFast, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 export default function NavBar() {
@@ -82,7 +82,7 @@ export default function NavBar() {
                             </ul>
                             <div className="in-game-date">
                                 {moment(inGameDate).format('DD/MM/YYYY')} 
-                                <FontAwesomeIcon icon={faHourglass} />
+                                <FontAwesomeIcon className="next-day" icon={faForwardFast} />
                             </div>
                         </>
                     )}
