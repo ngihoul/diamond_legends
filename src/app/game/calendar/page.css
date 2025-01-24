@@ -1,3 +1,25 @@
+.calendar-container .current-month {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    p {
+        margin: 0 1.2rem;
+    }
+
+    span {
+        cursor: pointer;
+
+        transition: color 0.5s ease;
+
+        &:hover {
+            color: var(--color-primary);
+
+            transition: color 0.5s ease;
+        }
+    }
+}
+
 .calendar-wrapper {
     display: flex;
     flex-wrap: wrap;

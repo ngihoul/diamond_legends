@@ -8,5 +8,9 @@
 
     .is-team {
         font-weight: bold;
+
+        svg {
+            color: var(--color-primary);
+        }
     }
 }

@@ -7,6 +7,9 @@ import getGames from "@/lib/services/game";
 import { getTeam } from "@/lib/services/team";
 import { useEffect, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+
 import './page.css';
 
 export default function Calendar() {
@@ -16,6 +19,8 @@ export default function Calendar() {
     const [month, setMonth] = useState<number>(new Date().getMonth() + 1);
 
     const { teamSelected } = useGame();
+
+    const year = new Date().getFullYear();
 
     useEffect(() => {
         const fetchGames = async (month?: number) => {
@@ -57,9 +62,11 @@ export default function Calendar() {
         <div className="calendar-container">
             <div className="heading">
                 <h2>Calendrier</h2>
-                <span onClick={() => previousMonth()}>{"<"}</span>
-                <p className="subtitle">{ months[month - 1] }</p>
-                <span onClick={() => nextMonth()}>{">"}</span>
+                <div className="current-month">
+                    <span onClick={() => previousMonth()}><FontAwesomeIcon icon={faArrowLeftLong} /></span>
+                    <p className="subtitle">{ `${months[month - 1]} ${year}` }</p>
+                    <span onClick={() => nextMonth()}><FontAwesomeIcon icon={faArrowRightLong} /></span>
+                </div>
             </div>
             <div className="calendar-wrapper">
                 {games && games.length > 0 ? games.map((game: Game) => (
