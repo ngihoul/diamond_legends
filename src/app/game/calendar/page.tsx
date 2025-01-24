@@ -16,24 +16,13 @@ import Loader from "@/app/_components/Loader/Loader";
 export default function Calendar() {
     const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
+    const { teamSelected, inGameDate } = useGame();
+
     const [games, setGames] = useState<Game[]>([]);
-    const [month, setMonth] = useState<number | null>(null);
+    const [month, setMonth] = useState<number | null>(inGameDate ?inGameDate.getMonth() + 1 : null);
     const [onlyMines, setOnlyMines] = useState<boolean>(false);
 
-    const { teamSelected } = useGame();
-
     const year = new Date().getFullYear();
-
-    // To force the month to be the InGameMonth
-    useEffect(() => {
-        const fetchInGameMonth = async () => {
-            if(teamSelected === null) return;
-            const responseTeam = await getTeam(teamSelected);
-            setMonth(new Date(responseTeam.inGameDate).getMonth() + 1);
-        }
-
-        fetchInGameMonth();
-    }, [])
 
     useEffect(() => {
         const fetchGames = async (month: number | null) => {
