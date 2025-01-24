@@ -62,6 +62,10 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
     }
   });
 
+  if (!player) {
+    return <Loader />;
+  }
+
   const battingSkills = createRadarData({
     Contact: player.contact,
     Power: player.power,
@@ -97,84 +101,76 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
   }
 
   return (
-    <>
-      { player ? 
-        (
-          <div className="player-profile-container">
-          <div className="breadcrumb">
-            <Link href={`/game/roster/${player.team.id}`}>← Retour vers le roster</Link>
-          </div>
-            <div className="heading-left">
-                <h2>
-                    <Image
-                        src={`/img/flags/${player.nationality.alpha2}.png`}
-                        alt={player.nationality.alpha2}
-                        width={30}
-                        height={20}
-                    /> 
-                    {player.lastname} <span className="firstname">{player.firstname}</span>
-                </h2>
+    <div className="player-profile-container">
+      <div className="breadcrumb">
+        <Link href={`/game/roster/${player.team.id}`}>← Retour vers le roster</Link>
+      </div>
+        <div className="heading-left">
+            <h2>
+                <Image
+                    src={`/img/flags/${player.nationality.alpha2}.png`}
+                    alt={player.nationality.alpha2}
+                    width={30}
+                    height={20}
+                /> 
+                {player.lastname} <span className="firstname">{player.firstname}</span>
+            </h2>
+        </div>
+        <div className="data">
+            <div className="section generic-data">
+                <ul>
+                    <li><span className="label">Date de naissance : </span> {moment(player.dateOfBirth).format("DD/MM/YYYY")} - {age(player.dateOfBirth)} ans</li>
+                    <li><span className="label">Lance : </span> {HandedType[player.throw]}</li>
+                    <li><span className="label">Frappe : </span> {HandedType[player.bat]}</li>
+                    <li><span className="label">Salaire : </span> ${player.salary.toFixed(2)}</li>
+                </ul>
             </div>
-            <div className="data">
-                <div className="section generic-data">
-                    <ul>
-                        <li><span className="label">Date de naissance : </span> {moment(player.dateOfBirth).format("DD/MM/YYYY")} - {age(player.dateOfBirth)} ans</li>
-                        <li><span className="label">Lance : </span> {HandedType[player.throw]}</li>
-                        <li><span className="label">Frappe : </span> {HandedType[player.bat]}</li>
-                        <li><span className="label">Salaire : </span> ${player.salary.toFixed(2)}</li>
-                    </ul>
-                </div>
-                <div className="section in-game">
-                    <ul>
-                        <li><span className="label">Equipe :</span> <Link className="link" href={`/game/team/${player.team.id}`}>{player.team.name} ({player.team.abbreviation.toUpperCase()})</Link></li>
-                        <li>
-                            <span className="label">Position{player.positions.length > 1 ? "s" : ""} :</span> {player.positions.map((pos) => PositionType[pos]).join(", ")}
-                        </li>
-                        <li><span className="label">Energie : </span> {player.energy} / 100</li>
-                    </ul>
+            <div className="section in-game">
+                <ul>
+                    <li><span className="label">Equipe :</span> <Link className="link" href={`/game/team/${player.team.id}`}>{player.team.name} ({player.team.abbreviation.toUpperCase()})</Link></li>
+                    <li>
+                        <span className="label">Position{player.positions.length > 1 ? "s" : ""} :</span> {player.positions.map((pos) => PositionType[pos]).join(", ")}
+                    </li>
+                    <li><span className="label">Energie : </span> {player.energy} / 100</li>
+                </ul>
+            </div>
+        </div>
+        <div className="skills">
+            <div className="section skills-section batting-skills">
+                <h3>Batting skills</h3>
+                <ul>
+                    <SkillItem label="Contact" skill={player.contact} />
+                    <SkillItem label="Puissance" skill={player.power} />
+                    <SkillItem label="Course" skill={player.running} />
+                </ul>
+                <div className="graph batting-skills-graph">
+                    <Radar data={battingSkills} />
                 </div>
             </div>
-            <div className="skills">
-                <div className="section skills-section batting-skills">
-                    <h3>Batting skills</h3>
-                    <ul>
-                        <SkillItem label="Contact" skill={player.contact} />
-                        <SkillItem label="Puissance" skill={player.power} />
-                        <SkillItem label="Course" skill={player.running} />
-                    </ul>
-                    <div className="graph batting-skills-graph">
-                        <Radar data={battingSkills} />
-                    </div>
+            <div className="section skills-section defense-skills">
+                <h3>Defense skills</h3>
+                <ul>
+                  <SkillItem label="Défense" skill={player.defense} />
+                  <SkillItem label="Mental" skill={player.mental} />
+                  <SkillItem label="Endurance" skill={player.stamina} />
+                </ul>
+                <div className="graph defense-skills-graph">
+                    <Radar data={defenseSkills} />
                 </div>
-                <div className="section skills-section defense-skills">
-                    <h3>Defense skills</h3>
-                    <ul>
-                      <SkillItem label="Défense" skill={player.defense} />
-                      <SkillItem label="Mental" skill={player.mental} />
-                      <SkillItem label="Endurance" skill={player.stamina} />
-                    </ul>
-                    <div className="graph defense-skills-graph">
-                        <Radar data={defenseSkills} />
-                    </div>
-                </div>
-                <div className="section skills-section pitching-skills">
-                    <h3>Pitching skills</h3>
-                    <ul>
-                      <SkillItem label="Contrôle" skill={player.control} />
-                      <SkillItem label="Vitesse" skill={player.velocity} />
-                      <SkillItem label="Mouvement" skill={player.movement} />
-                    </ul>
-                    <div className="graph pitching-skills-graph">
-                        <Radar data={pitchingSkills} />
-                    </div>
+            </div>
+            <div className="section skills-section pitching-skills">
+                <h3>Pitching skills</h3>
+                <ul>
+                  <SkillItem label="Contrôle" skill={player.control} />
+                  <SkillItem label="Vitesse" skill={player.velocity} />
+                  <SkillItem label="Mouvement" skill={player.movement} />
+                </ul>
+                <div className="graph pitching-skills-graph">
+                    <Radar data={pitchingSkills} />
                 </div>
             </div>
         </div>
-        ) : (
-          <Loader />
-        )
-      }
-    </>
+    </div>
   );
 }
 
