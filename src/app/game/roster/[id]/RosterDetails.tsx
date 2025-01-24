@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import './page.css';
 import Link from "next/link";
+import Loader from "@/app/_components/Loader/Loader";
 
 export default function RosterDetails({ teamId } : { teamId: number }) {
     const [team, setTeam] = useState({} as Team);
@@ -69,7 +70,7 @@ export default function RosterDetails({ teamId } : { teamId: number }) {
                     </tbody>
                 </table>
             ) : (
-                <p>Chargement des joueurs ...</p>
+                <Loader />
             )}
         </div>
     );
