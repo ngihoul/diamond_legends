@@ -48,7 +48,9 @@ export default function NavBar() {
                             <li>
                                 <Link href={'/game/dashboard'}>Dashboard</Link>
                             </li>
-                            <li><a href="#">Calendrier</a></li>
+                            <li>
+                                <Link href={`/game/calendar`}>Calendrier</Link>
+                            </li>
                             <li>
                                 <Link href={`/game/roster/${teamSelected}`}>Equipe</Link>
                             </li>

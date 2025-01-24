@@ -45,3 +45,9 @@ export interface TeamViewPlayer {
     name: string;
     abbreviation: string;
 }
+
+export interface TeamViewCalendar {
+    id: number;
+    name: string;
+    abbreviation: string;
+}

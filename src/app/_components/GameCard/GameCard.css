@@ -1,0 +1,12 @@
+.game-card-table {
+    vertical-align: middle;
+
+    .runs, .hits, .errors {
+        width: 46px;
+        text-align: center;
+    }
+
+    .is-team {
+        font-weight: bold;
+    }
+}
