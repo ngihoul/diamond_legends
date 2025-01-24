@@ -52,15 +52,21 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
         borderWidth: 1,
       },
     ],
-    options: {
-      scales: {
-        r: {
-          suggestedMin: 0,
-          suggestedMax: 100
-        }
-      }
-    }
   });
+
+  const radarOptions = {
+    scales: {
+      r: {
+        suggestedMin: 0,
+        suggestedMax: 100
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+    }
+  };
 
   if (!player) {
     return <Loader />;
@@ -144,7 +150,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
                     <SkillItem label="Course" skill={player.running} />
                 </ul>
                 <div className="graph batting-skills-graph">
-                    <Radar data={battingSkills} />
+                    <Radar data={battingSkills} options={radarOptions}/>
                 </div>
             </div>
             <div className="section skills-section defense-skills">
@@ -155,7 +161,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
                   <SkillItem label="Endurance" skill={player.stamina} />
                 </ul>
                 <div className="graph defense-skills-graph">
-                    <Radar data={defenseSkills} />
+                    <Radar data={defenseSkills} options={radarOptions}/>
                 </div>
             </div>
             <div className="section skills-section pitching-skills">
@@ -166,7 +172,7 @@ export default function PlayerDetails({ playerId }: { playerId: number }) {
                   <SkillItem label="Mouvement" skill={player.movement} />
                 </ul>
                 <div className="graph pitching-skills-graph">
-                    <Radar data={pitchingSkills} />
+                    <Radar data={pitchingSkills} options={radarOptions}/>
                 </div>
             </div>
         </div>
