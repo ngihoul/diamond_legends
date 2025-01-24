@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import RosterDetails from "./RosterDetails";
+import Loader from "@/app/_components/Loader/Loader";
 
 export default async function PlayerProfile({ params }: { params: { id: number } }) {
   const teamId = (await params).id;
@@ -7,7 +8,7 @@ export default async function PlayerProfile({ params }: { params: { id: number }
   return (
     <>
       {/* TODO : créer un composant Loading */}
-      <Suspense fallback={<div>Chargement des informations...</div>}>
+      <Suspense fallback={<Loader />}>
         <RosterDetails teamId={teamId} />
       </Suspense>
     </>
