@@ -10,6 +10,8 @@ import ball from '@/public/img/ball_without_bg.png';
 import { useEffect, useState } from 'react';
 import { Team } from '@/lib/models/team.model';
 import { getTeam } from '@/lib/services/team';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faChartLine, faChartSimple, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavBar() {
     const [team, setTeam] = useState<Team | null>(null);
@@ -46,18 +48,35 @@ export default function NavBar() {
                     {teamSelected && team && (
                         <ul>
                             <li>
-                                <Link href={'/game/dashboard'}>Dashboard</Link>
+                                <Link href={'/game/dashboard'}>
+                                    <FontAwesomeIcon icon={faChartLine} />
+                                    Dashboard
+                                </Link>
                             </li>
                             <li>
-                                <Link href={`/game/calendar`}>Calendrier</Link>
+                                <Link href={`/game/calendar`}>
+                                    <FontAwesomeIcon icon={faCalendarDays} />
+                                    Calendrier
+                                </Link>
                             </li>
                             <li>
-                                <Link href={`/game/roster/${teamSelected}`}>Equipe</Link>
+                                <Link href={`/game/roster/${teamSelected}`}>
+                                    <FontAwesomeIcon icon={faPeopleGroup} />
+                                    Equipe
+                                </Link>
                             </li>
                             <li>
-                                <Link href={`/game/league/${team.league.id}`}>Ligue</Link>
+                                <Link href={`/game/league/${team.league.id}`}>
+                                    <FontAwesomeIcon icon={faTrophy} />
+                                    Ligue
+                                </Link>
                             </li>
-                            <li><a href="#">Stats</a></li>
+                            <li>
+                                <a href="#">
+                                    <FontAwesomeIcon icon={faChartSimple} />
+                                    Stats
+                                </a>
+                            </li>
                         </ul>
                     )}
                 </div>

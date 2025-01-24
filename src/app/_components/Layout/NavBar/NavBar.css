@@ -13,7 +13,7 @@
         height: var(--bar-height);
 
         a, ul {
-            align-self:last baseline;
+            align-self: last baseline;
             padding-bottom: 0.8rem;
             margin-left: 0.8rem;
         }
@@ -22,5 +22,9 @@
     ul li {
         display: inline-block;
         margin: 0 3.2rem 0 0;
+
+        svg {
+            margin-right: 0.4rem; 
+        }
     }
 }
