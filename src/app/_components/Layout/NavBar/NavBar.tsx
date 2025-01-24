@@ -11,13 +11,14 @@ import { useEffect, useState } from 'react';
 import { Team } from '@/lib/models/team.model';
 import { getTeam } from '@/lib/services/team';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays, faChartLine, faChartSimple, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faChartLine, faChartSimple, faHourglass, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 
 export default function NavBar() {
     const [team, setTeam] = useState<Team | null>(null);
 
     const { userId } = useAuth();
-    const { teamSelected } = useGame();
+    const { teamSelected, inGameDate } = useGame();
 
     useEffect(() => {
         const fetchTeam = async () => {
@@ -46,38 +47,44 @@ export default function NavBar() {
                     )}
 
                     {teamSelected && team && (
-                        <ul>
-                            <li>
-                                <Link href={'/game/dashboard'}>
-                                    <FontAwesomeIcon icon={faChartLine} />
-                                    Dashboard
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={`/game/calendar`}>
-                                    <FontAwesomeIcon icon={faCalendarDays} />
-                                    Calendrier
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={`/game/roster/${teamSelected}`}>
-                                    <FontAwesomeIcon icon={faPeopleGroup} />
-                                    Equipe
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={`/game/league/${team.league.id}`}>
-                                    <FontAwesomeIcon icon={faTrophy} />
-                                    Ligue
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <FontAwesomeIcon icon={faChartSimple} />
-                                    Stats
-                                </a>
-                            </li>
-                        </ul>
+                            <>
+                            <ul>
+                                <li>
+                                    <Link href={'/game/dashboard'}>
+                                        <FontAwesomeIcon icon={faChartLine} />
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={`/game/calendar`}>
+                                        <FontAwesomeIcon icon={faCalendarDays} />
+                                        Calendrier
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={`/game/roster/${teamSelected}`}>
+                                        <FontAwesomeIcon icon={faPeopleGroup} />
+                                        Equipe
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={`/game/league/${team.league.id}`}>
+                                        <FontAwesomeIcon icon={faTrophy} />
+                                        Ligue
+                                    </Link>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <FontAwesomeIcon icon={faChartSimple} />
+                                        Stats
+                                    </a>
+                                </li>
+                            </ul>
+                            <div className="in-game-date">
+                                {moment(inGameDate).format('DD/MM/YYYY')} 
+                                <FontAwesomeIcon icon={faHourglass} />
+                            </div>
+                        </>
                     )}
                 </div>
             </nav>
