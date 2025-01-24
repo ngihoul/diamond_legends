@@ -12,7 +12,7 @@ export interface Team {
     country: Country;
     league: League;
     season: number;
-    currentDay: number;
+    inGameDate: Date;
     budget: number;
     logo: string;
     color_1: string;

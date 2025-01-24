@@ -1,25 +1,36 @@
-.calendar-container .current-month {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-
-    p {
-        margin: 0 1.2rem;
-        min-width: 180px;
+.calendar-container {
+    .filters {
+        display: flex;
+        justify-content: start;
+        align-items: baseline;
+        margin-bottom: 1.6rem;
     }
 
-    span {
-        cursor: pointer;
+    .current-month {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
 
-        transition: color 0.5s ease;
+        p {
+            margin: 0 1.2rem;
+            min-width: 180px;
+        }
 
-        &:hover {
-            color: var(--color-primary);
+        span {
+            cursor: pointer;
 
             transition: color 0.5s ease;
+
+            &:hover {
+                color: var(--color-primary);
+
+                transition: color 0.5s ease;
+            }
         }
     }
 }
+    
+
 
 .calendar-wrapper {
     display: flex;

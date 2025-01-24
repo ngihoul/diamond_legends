@@ -19,7 +19,7 @@ export interface GameQuery {
     leagueId?: number;
     teamId?: number;
     season?: number;
-    month?: number;
+    month?: number | null;
     day?: number;
 }
 
