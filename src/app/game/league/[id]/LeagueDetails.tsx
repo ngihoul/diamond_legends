@@ -40,7 +40,7 @@ export default function LeagueDetails({ leagueId } : { leagueId : number}) {
                             <tr key={team.id}>
                                 <td>
                                     <Link className="link" href={`/game/roster/${team.id}`}>
-                                        { team.id == teamSelected ? <b>{team.name}</b> : team.name}
+                                        { team.id == teamSelected ? <b>{team.name}</b> : team.name} ({ team.abbreviation })
                                     </Link>
                                 </td>
                                 <td></td>
