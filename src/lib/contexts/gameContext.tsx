@@ -4,6 +4,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { GameContextType, GameProviderProps } from "../models/game.model";
 import { getTeam } from "../services/team";
+import { getLeague } from "../services/league";
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
@@ -35,12 +36,12 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
     const changeTeam = async (teamId: number | null) => {
         if(teamId) {
-            const response = await getTeam(teamId);
-            setInGameDate(new Date(response.inGameDate));
+            const responseTeam = await getTeam(teamId);
+            const responseLeague = await getLeague(responseTeam.league.id);
+            setInGameDate(new Date(responseLeague.inGameDate));
 
             window.localStorage.setItem('teamSelected', teamId.toString());
-            window.localStorage.setItem('inGameDate', response.inGameDate.toString());
-
+            window.localStorage.setItem('inGameDate', responseLeague.inGameDate.toString());
         } else {
             window.localStorage.removeItem('teamSelected');
             window.localStorage.removeItem('inGameDate');
