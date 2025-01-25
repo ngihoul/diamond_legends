@@ -43,8 +43,8 @@
     - son roster (équipe de 25 joueurs) [v]
     - les autres rosters [v]
 
-6. L'utilisateur peut consulter le calendrier des matchs de la saison en cours
-    - Les matchs sont créés au lancement de la saison
+6. L'utilisateur peut consulter le calendrier des matchs de la saison en cours [v]
+    - Les matchs sont créés au lancement de la saison [v]
 
 7. L'utilisateur peut avancer d'un jour dans la saison
     - Lorsqu'on arrive à la fin d'une saison, la nouvelle saison est créée   
