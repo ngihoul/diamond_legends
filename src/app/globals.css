@@ -373,6 +373,7 @@ table {
   display: inline-block;
   border: 2px solid var(--color-primary);
   border-radius: 5px;
+  background-color: var(--color-bg-light);
   color: var(--color-primary);
   padding: 0.8rem;
   margin: 0.8rem 0.8rem 0.8rem 0;
