@@ -35,7 +35,7 @@
 .calendar-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     gap: 0.8rem;
 
     .calendar-item {
