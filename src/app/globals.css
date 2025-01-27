@@ -324,6 +324,11 @@ table {
       font-family: var(--typo-text);
       font-weight: bold;
     }
+
+    tr.is-today {
+      background-color: var(--color-secondary);
+      color: var(--color-bg-light);
+    }
   }
 
   tbody tr:nth-child(odd) {

@@ -5,20 +5,22 @@ import { faExplosion } from '@fortawesome/free-solid-svg-icons'
 
 import './GameCard.css';
 import { useGame } from "@/lib/contexts/gameContext";
+import Button from "../Button/Button";
 
 export default function GameCard({ game} : { game: Game }) {
-    const { teamSelected } = useGame();
+    const { teamSelected, inGameDate } = useGame();
 
-    const isTeamClassName = (teamId: number) => teamId === teamSelected ? 'is-team' : '';
-    const isTeamIcon = (teamId: number) => teamId === teamSelected ? (<FontAwesomeIcon icon={faExplosion} />) : '';
-    
+    const isTeam = (teamId: number) => teamId === teamSelected;
+    const isTeamClassName = (teamId: number) => isTeam(teamId) ? 'is-team' : '';
+    const isTeamIcon = (teamId: number) => isTeam(teamId) ? (<FontAwesomeIcon icon={faExplosion} />) : '';
+    const isToday = moment(game.date).format('DD/MM/YYYY') == moment(inGameDate).format('DD/MM/YYYY');
     
     return (
         <div className="game-card">
             <table className="game-card-table">
                 <thead>
-                    <tr>
-                        <th>{moment(game.date).format('DD/MM/YYYY')}</th>
+                    <tr className={ isToday && (isTeam(game.home.id) || isTeam(game.away.id)) ? 'is-today' : ''}>
+                        <th>{ isToday ? 'Aujourd\'hui' : moment(game.date).format('DD/MM/YYYY')}</th>
                         <th className="runs">R</th>
                         <th className="hits">H</th>
                         <th className="errors">E</th>
@@ -37,6 +39,13 @@ export default function GameCard({ game} : { game: Game }) {
                         <td className="hits">{game.homeHits}</td>
                         <td className="errors">{game.homeErrors}</td>
                     </tr>
+                    { (isTeam(game.home.id) || isTeam(game.away.id)) && isToday && (
+                        <tr>
+                            <td colSpan={4} className="play">
+                                <Button action={() => {alert('clicked')}} className="btn">Play ball !</Button>
+                            </td>
+                        </tr>
+                    ) }
                 </tbody>
             </table>
         </div>
