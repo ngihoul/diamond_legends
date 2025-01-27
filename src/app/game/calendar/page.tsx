@@ -64,9 +64,9 @@ export default function Calendar() {
     }
 
     return (
-        <>
-            {month && games && games.length > 0 ? (
-                <div className="calendar-container">
+        <div className="calendar-container">
+            { month && games ? (
+                <>
                     <div className="heading">
                         <h2>Calendrier</h2>
                         <div className="current-month">
@@ -75,21 +75,31 @@ export default function Calendar() {
                             <span onClick={() => nextMonth()}><FontAwesomeIcon icon={faArrowRightLong} /></span>
                         </div>
                     </div>
-                    <div className="filters">
-                        <p className="">Filtrer :</p>
-                        <span onClick={() => setOnlyMines(!onlyMines)} className={ onlyMines ? "pill active" : 'pill' }>Mes matchs uniquement</span>
-                    </div>
-                    <div className="calendar-wrapper">
-                        {games.map((game: Game) => (
-                            <div key={game.id} className="calendar-item">
-                                <GameCard game={game} />
+                    
+                    { games.length > 0 ? (
+                        <>
+                            <div className="filters">
+                                <p className="">Filtrer :</p>
+                                <span onClick={() => setOnlyMines(!onlyMines)} className={ onlyMines ? "pill active" : 'pill' }>Mes matchs uniquement</span>
                             </div>
-                        ))}
-                    </div>
-                </div>
+                            <div className="calendar-wrapper">
+                                {games.map((game: Game) => (
+                                    <div key={game.id} className="calendar-item">
+                                        <GameCard game={game} />
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="no-games">
+                            <p>Aucun match n&apos;a encore lieu</p>
+                        </div>
+                    ) }
+                    
+                </>
             ) : (
                 <Loader />
             )}
-        </>
+        </div>        
     );
 }

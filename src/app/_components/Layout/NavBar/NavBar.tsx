@@ -11,14 +11,18 @@ import { useEffect, useState } from 'react';
 import { Team } from '@/lib/models/team.model';
 import { getTeam } from '@/lib/services/team';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays, faChartLine, faChartSimple, faForwardFast, faPeopleGroup, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faChartLine, faChartSimple, faForwardFast, faPeopleGroup, faPlay, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import { nextDay } from '@/lib/services/league';
+import { useToaster } from '@/lib/contexts/toasterContext';
 
 export default function NavBar() {
     const [team, setTeam] = useState<Team | null>(null);
+    const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 
     const { userId } = useAuth();
-    const { teamSelected, inGameDate } = useGame();
+    const { teamSelected, inGameDate, changeInGameDate } = useGame();
+    const { showToast } = useToaster();
 
     useEffect(() => {
         const fetchTeam = async () => {
@@ -30,6 +34,31 @@ export default function NavBar() {
 
         fetchTeam();
     }, [teamSelected]);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest('.forward-dropdown') && !e.target.closest('.forward-dropdown *')) {
+              setIsDropdownVisible(false);
+            }
+        };
+      
+        document.body.addEventListener('click', handleClickOutside);
+      
+        return () => {
+          document.body.removeEventListener('click', handleClickOutside);
+        };
+    }, [setIsDropdownVisible]);
+
+    const goNextDay = async (leagueId: number) => {
+        try {
+            console.log("Go Next Day +1");
+            const response = await nextDay(leagueId);
+            changeInGameDate(response.inGameDate);
+        } catch(e) {
+            showToast((e as Error).message, 'error');
+        }
+        
+    }
 
     return (
         // TODO : create navbar when not authenticated
@@ -80,9 +109,19 @@ export default function NavBar() {
                                     </a>
                                 </li>
                             </ul>
-                            <div className="in-game-date">
+                            <div className="in-game-date" onClick={() => setIsDropdownVisible(!isDropdownVisible)}>
                                 {moment(inGameDate).format('DD/MM/YYYY')} 
                                 <FontAwesomeIcon className="next-day" icon={faForwardFast} />
+                                { isDropdownVisible && 
+                                    <div className="forward-dropdown">
+                                        <div className='forward' onClick={() => goNextDay(team.league.id)}>
+                                            Avancer d&apos;un jour <FontAwesomeIcon icon={faPlay} />
+                                        </div>
+                                        <div className="fast-forward">
+                                            Avancer jusqu&apos;au prochain match <FontAwesomeIcon className="next-day" icon={faForwardFast} />
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </>
                     )}

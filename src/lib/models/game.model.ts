@@ -25,8 +25,10 @@ export interface GameQuery {
 
 export interface GameContextType {
     teamSelected: number | null;
+    leagueId: number | null;
     inGameDate: Date | null;
     changeTeam: (teamId: number | null) => void;
+    changeInGameDate: (date: Date) => void;
 }
 
 export interface GameProviderProps {

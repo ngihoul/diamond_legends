@@ -20,6 +20,7 @@ export const useGame = () => {
 
 export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     const [teamSelected, setTeamSelected] = useState<number | null>(null);
+    const [leagueId, setLeagueId] = useState<number | null>(null);
     const [inGameDate, setInGameDate] = useState<Date | null>(null);
 
     useEffect(() => {
@@ -32,26 +33,42 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         if(storedInGameDate) {
             setInGameDate(new Date(storedInGameDate));
         }
+
+        const storedLeagueId = window.localStorage.getItem('leagueId');
+        if(storedLeagueId) {
+            setLeagueId(parseInt(storedLeagueId));
+        }
     }, []);
 
     const changeTeam = async (teamId: number | null) => {
         if(teamId) {
             const responseTeam = await getTeam(teamId);
-            const responseLeague = await getLeague(responseTeam.league.id);
+
+            const leagueId = responseTeam.league.id;
+            setLeagueId(leagueId);
+
+            const responseLeague = await getLeague(leagueId);
             setInGameDate(new Date(responseLeague.inGameDate));
 
             window.localStorage.setItem('teamSelected', teamId.toString());
             window.localStorage.setItem('inGameDate', responseLeague.inGameDate.toString());
+            window.localStorage.setItem('leagueId', leagueId.toString());
         } else {
             window.localStorage.removeItem('teamSelected');
             window.localStorage.removeItem('inGameDate');
+            window.localStorage.removeItem('leagueId');
         }
         
         setTeamSelected(teamId);
     }
 
+    const changeInGameDate = async (date: Date) => {
+        setInGameDate(date);
+        window.localStorage.setItem('inGameDate', date.toString());
+    }
+
     return (
-        <GameContext.Provider value={{ teamSelected, inGameDate, changeTeam }}>
+        <GameContext.Provider value={{ teamSelected, leagueId, inGameDate, changeTeam, changeInGameDate }}>
             { children }
         </GameContext.Provider>
     );
