@@ -13,7 +13,7 @@ import { getTeam } from '@/lib/services/team';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faChartLine, faChartSimple, faForwardFast, faPeopleGroup, faPlay, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
-import { nextDay } from '@/lib/services/league';
+import { nextDay, nextGame } from '@/lib/services/league';
 import { useToaster } from '@/lib/contexts/toasterContext';
 
 export default function NavBar() {
@@ -51,13 +51,20 @@ export default function NavBar() {
 
     const goNextDay = async (leagueId: number) => {
         try {
-            console.log("Go Next Day +1");
             const response = await nextDay(leagueId);
             changeInGameDate(response.inGameDate);
         } catch(e) {
             showToast((e as Error).message, 'error');
         }
-        
+    }
+
+    const goNextGame = async (leagueId: number) => {
+        try {
+            const response = await nextGame(leagueId);
+            changeInGameDate(response.inGameDate);
+        } catch(e) {
+            showToast((e as Error).message, 'error');
+        }
     }
 
     return (
@@ -117,7 +124,7 @@ export default function NavBar() {
                                         <div className='forward' onClick={() => goNextDay(team.league.id)}>
                                             Avancer d&apos;un jour <FontAwesomeIcon icon={faPlay} />
                                         </div>
-                                        <div className="fast-forward">
+                                        <div className="fast-forward" onClick={() => goNextGame(team.league.id)}>
                                             Avancer jusqu&apos;au prochain match <FontAwesomeIcon className="next-day" icon={faForwardFast} />
                                         </div>
                                     </div>
