@@ -3,8 +3,9 @@ import { TeamViewCalendar } from "./team.model";
 
 export interface Game {
     id: number;
-    season: number;
     date: Date;
+    season: number;
+    status: GameStatus;
     home: TeamViewCalendar;
     away: TeamViewCalendar;
     homeRuns?: number;
@@ -33,4 +34,9 @@ export interface GameContextType {
 
 export interface GameProviderProps {
     children: ReactNode;
+}
+
+export enum GameStatus {
+    toBePlayed = 0,
+    played = 1
 }

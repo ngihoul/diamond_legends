@@ -1,4 +1,4 @@
-import { Game } from "@/lib/models/game.model";
+import { Game, GameStatus } from "@/lib/models/game.model";
 import moment from "moment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExplosion } from '@fortawesome/free-solid-svg-icons'
@@ -39,7 +39,7 @@ export default function GameCard({ game} : { game: Game }) {
                         <td className="hits">{game.homeHits}</td>
                         <td className="errors">{game.homeErrors}</td>
                     </tr>
-                    { (isTeam(game.home.id) || isTeam(game.away.id)) && isToday && (
+                    { (isTeam(game.home.id) || isTeam(game.away.id)) && isToday && game.status === GameStatus.toBePlayed && (
                         <tr>
                             <td colSpan={4} className="play">
                                 <Button action={() => {alert('clicked')}} className="btn">Play ball !</Button>
