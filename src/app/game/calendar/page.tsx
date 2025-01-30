@@ -3,7 +3,7 @@
 import GameCard from "@/app/_components/GameCard/GameCard";
 import { useGame } from "@/lib/contexts/gameContext";
 import { Game } from "@/lib/models/game.model";
-import getGames from "@/lib/services/game";
+import { getGames } from "@/lib/services/game";
 import { getTeam } from "@/lib/services/team";
 import { useEffect, useState } from "react";
 

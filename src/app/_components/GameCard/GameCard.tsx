@@ -6,9 +6,11 @@ import { faExplosion } from '@fortawesome/free-solid-svg-icons'
 import './GameCard.css';
 import { useGame } from "@/lib/contexts/gameContext";
 import Button from "../Button/Button";
+import { useRouter } from "next/navigation";
 
 export default function GameCard({ game} : { game: Game }) {
     const { teamSelected, inGameDate } = useGame();
+    const router = useRouter();
 
     const isTeam = (teamId: number) => teamId === teamSelected;
     const isTeamClassName = (teamId: number) => isTeam(teamId) ? 'is-team' : '';
@@ -42,7 +44,7 @@ export default function GameCard({ game} : { game: Game }) {
                     { (isTeam(game.home.id) || isTeam(game.away.id)) && isToday && game.status === GameStatus.toBePlayed && (
                         <tr>
                             <td colSpan={4} className="play">
-                                <Button action={() => {alert('clicked')}} className="btn">Play ball !</Button>
+                                <Button action={() => {router.push(`/game/preview/${game.id}`)}} className="btn">Play ball !</Button>
                             </td>
                         </tr>
                     ) }

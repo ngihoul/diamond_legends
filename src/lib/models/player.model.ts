@@ -11,6 +11,7 @@ export interface Player {
     team: TeamViewPlayer;
     throw: HandedType;
     bat: HandedType;
+    avg: number;
     salary: number;
     energy: number;
     contact: number;
