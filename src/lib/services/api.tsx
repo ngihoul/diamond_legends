@@ -2,6 +2,30 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { Payload } from "../models/auth.model";
 import { jwtDecode } from "jwt-decode";
+import * as cookieService from "./cookie.service";
+
+export const apiServer = axios.create({
+    baseURL: API_URL,
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+});
+
+apiServer.interceptors.request.use(
+    async (config) => {
+        const token = await cookieService.getToken();
+        if(token && isTokenValid(token)) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+
 
 const apiClient = axios.create({
     baseURL: API_URL,

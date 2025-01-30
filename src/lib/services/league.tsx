@@ -1,11 +1,14 @@
 import { League } from "../models/league.model";
-import apiClient from "./api";
+import apiClient, { apiServer } from "./api";
 
 export const getLeague = async (leagueId: number): Promise<League> => {
     try {
-        const response = await apiClient.get(`/league/${leagueId}`); 
+        await (new Promise((resolve) => setTimeout(resolve, 1_000)));
+        const response = await apiServer.get(`/league/${leagueId}`); 
         return response.data;
     } catch(error) {
+        console.log(error);
+        
         throw new Error((error as Error).message, (error as Error));
     }
 }

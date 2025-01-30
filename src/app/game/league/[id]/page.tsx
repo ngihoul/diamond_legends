@@ -1,13 +1,44 @@
-import { Suspense } from "react";
-import LeagueDetails from "./LeagueDetails";
-import Loader from "@/app/_components/Loader/Loader";
+import { getLeague } from "@/lib/services/league";
+import TeamButton from "./_temp/TeamButton";
+import { League } from "@/lib/models/league.model";
 
-export default async function League({ params } : { params : { id: number}}) {
+export default async function LeaguePage({ params } : { params : { id: number}}) {
     const leagueId = (await params).id;
 
+
+    const league : League = await getLeague(leagueId);
+
     return (
-        <Suspense fallback={<Loader />}>
-            <LeagueDetails leagueId={leagueId} />
-        </Suspense>
+        <div className="league-container">
+            <div className="heading-left">
+                <h2>{league.name}</h2>
+                <table className="league-table">
+                    <thead>
+                        <tr>
+                            <th>Equipe</th>
+                            <th>W</th>
+                            <th>L</th>
+                            <th>%</th>
+                            <th>L10</th>
+                            <th>STRK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {league.teams?.map((team) => (
+                            <tr key={team.id}>
+                                <td>
+                                    <TeamButton team={team} />
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 }

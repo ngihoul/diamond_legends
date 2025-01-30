@@ -1,4 +1,5 @@
 'use client';
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContextType, AuthProviderProps, Payload, SignInFormValues, SignUpFormValues } from "../models/auth.model";
 import apiClient from "../services/api";
@@ -7,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { useToaster } from "./toasterContext";
 import { useGame } from "./gameContext";
+import { clearToken, saveToken } from "../services/cookie.service";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -47,6 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             
             const newUserId = getUserId(newToken);
             setUserId(newUserId);
+            saveToken(newToken);
             
             showToast('Connexion réussie !', 'success');
             router.push('/game/load');
@@ -73,6 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const logout = async () => {
         window.localStorage.removeItem('token');
+        clearToken();
         setToken(null);
         setUserId(null);
         changeTeam(null);
