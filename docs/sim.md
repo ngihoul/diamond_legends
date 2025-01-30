@@ -34,7 +34,6 @@ FUNCTION Pitch() :
 
         SINON
             Ball++
-            Pitch()
 
     SI Hit
         SI flyball
