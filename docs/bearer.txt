@@ -1,0 +1,57 @@
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibmdpaG91bCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im5naWhvdWxAaG90bWFpbC5jb20iLCJJZCI6IjIiLCJVc2VybmFtZSI6Im5naWhvdWwiLCJleHAiOjE3MzgyMjk4MDYsImlzcyI6IkRpYW1vbmRMZWdlbmRzIiwiYXVkIjoiQW5ndWxhcl9EaWFtb25kTGVnZW5kc19Pbmx5In0.KqvbpNa1ZPIq-KLzHYMJ42dqOUDcMUS4-gqgXnDnxoM
+
+
+{
+  "lineUpDetails": [
+    {
+      "playerId": 176,
+      "order": 10,
+      "position": 1
+    },
+    {
+      "playerId": 188,
+      "order": 1,
+      "position": 2
+    },
+    {
+      "playerId": 190,
+      "order": 2,
+      "position": 3
+    },
+    {
+      "playerId": 191,
+      "order": 3,
+      "position": 4
+    },
+    {
+      "playerId": 192,
+      "order": 4,
+      "position": 5
+    },
+    {
+      "playerId": 193,
+      "order": 5,
+      "position": 6
+    },
+    {
+      "playerId": 196,
+      "order": 6,
+      "position": 7
+    },
+    {
+      "playerId": 199,
+      "order": 7,
+      "position": 8
+    },
+    {
+      "playerId": 198,
+      "order": 8,
+      "position": 9
+    },
+    {
+      "playerId": 195,
+      "order": 9,
+      "position": 10
+    }
+  ]
+}
