@@ -49,19 +49,19 @@ export default function NavBar() {
         };
     }, [setIsDropdownVisible]);
 
-    const goNextDay = async (leagueId: number) => {
+    const goNextDay = async (leagueId: number, teamId: number) => {
         try {
-            const response = await nextDay(leagueId);
-            changeInGameDate(response.inGameDate);
+            const response = await nextDay(leagueId, teamId);
+            changeInGameDate(new Date(response.inGameDate));
         } catch(e) {
             showToast((e as Error).message, 'error');
         }
     }
 
-    const goNextGame = async (leagueId: number) => {
+    const goNextGame = async (leagueId: number, teamId: number) => {
         try {
-            const response = await nextGame(leagueId);
-            changeInGameDate(response.inGameDate);
+            const response = await nextGame(leagueId, teamId);
+            changeInGameDate(new Date(response.inGameDate));
         } catch(e) {
             showToast((e as Error).message, 'error');
         }
@@ -121,10 +121,10 @@ export default function NavBar() {
                                 <FontAwesomeIcon className="next-day" icon={faForwardFast} />
                                 { isDropdownVisible && 
                                     <div className="forward-dropdown">
-                                        <div className='forward' onClick={() => goNextDay(team.league.id)}>
+                                        <div className='forward' onClick={() => goNextDay(team.league.id, teamSelected)}>
                                             Avancer d&apos;un jour <FontAwesomeIcon icon={faPlay} />
                                         </div>
-                                        <div className="fast-forward" onClick={() => goNextGame(team.league.id)}>
+                                        <div className="fast-forward" onClick={() => goNextGame(team.league.id, teamSelected)}>
                                             Avancer jusqu&apos;au prochain match <FontAwesomeIcon className="next-day" icon={faForwardFast} />
                                         </div>
                                     </div>

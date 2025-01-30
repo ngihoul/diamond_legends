@@ -10,18 +10,18 @@ export const getLeague = async (leagueId: number): Promise<League> => {
     }
 }
 
-export const nextDay = async (leagueId: number): Promise<League> => {
+export const nextDay = async (leagueId: number, teamId: number): Promise<League> => {
     try {
-        const response = await apiClient.get(`/league/${leagueId}/next-day`); 
+        const response = await apiClient.get(`/league/${leagueId}/next-day/${teamId}`); 
         return response.data;
     } catch(error) {
         throw new Error((error as Error).message, (error as Error));
     }
 }
 
-export const nextGame = async (leagueId: number): Promise<League> => {
+export const nextGame = async (leagueId: number, teamId: number): Promise<League> => {
     try {
-        const response = await apiClient.get(`/league/${leagueId}/next-game`); 
+        const response = await apiClient.get(`/league/${leagueId}/next-game/${teamId}`); 
         return response.data;
     } catch(error) {
         throw new Error((error as Error).message, (error as Error));
