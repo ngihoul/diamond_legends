@@ -19,7 +19,7 @@ export default function Calendar() {
     const { teamSelected, inGameDate } = useGame();
 
     const [games, setGames] = useState<Game[]>([]);
-    const [month, setMonth] = useState<number | null>(inGameDate ?inGameDate.getMonth() + 1 : null);
+    const [month, setMonth] = useState<number | null>(inGameDate ? inGameDate.getMonth() + 1 : null);
     const [onlyMines, setOnlyMines] = useState<boolean>(false);
 
     const year = new Date().getFullYear();
@@ -92,7 +92,7 @@ export default function Calendar() {
                         </>
                     ) : (
                         <div className="no-games">
-                            <p>Aucun match n&apos;a encore lieu</p>
+                            <p>Aucun match programmé ce mois-ci.</p>
                         </div>
                     ) }
                     
