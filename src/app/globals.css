@@ -2,13 +2,13 @@
   --color-bg-light: #ffffff;
   --color-bg-dark: #171717;
 
-  --color-primary: #B6062A;
-  --color-secondary: #031D71;
+  --color-primary: #b6062a;
+  --color-secondary: #031d71;
 
   --color-text-light: #ffffff;
 
   --color-border: #dcdcdc;
-  
+
   --color-error-bg: #f8d7da;
   --color-error-text: #842029;
   --color-error-border: #f5c2c7;
@@ -17,6 +17,10 @@
   --color-success-bg: #d1e7dd;
   --color-success-text: #0f5132;
   --color-success-border: #badbcc;
+
+  --color-info-bg: #fff3e0;
+  --color-info-border: #ffcc80;
+  --color-info-text: #856404;
 
   --bar-height: 64px;
 
@@ -48,7 +52,9 @@ body {
   margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--typo-heading);
   letter-spacing: 0.25rem;
 
@@ -66,7 +72,7 @@ h2 {
   padding-bottom: 1.6rem;
 
   h2 {
-      padding: 0.8rem;
+    padding: 0.8rem;
   }
 }
 
@@ -82,7 +88,12 @@ h2 {
   margin-bottom: 1.6rem;
 }
 
-p, a, button, label, input, textarea {
+p,
+a,
+button,
+label,
+input,
+textarea {
   font-family: var(--typo-text);
 }
 
@@ -170,10 +181,11 @@ form {
 
 .form-control select {
   appearance: none;
-  background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4L2 0zM2 5L0 3h4l-2 2z"/></svg>') no-repeat right 0.75rem center/8px 10px;
+  background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333" d="M2 0L0 2h4L2 0zM2 5L0 3h4l-2 2z"/></svg>')
+    no-repeat right 0.75rem center/8px 10px;
 }
 
-.form-control input[type="checkbox"] {
+.form-control input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -188,7 +200,7 @@ form {
   transition: background-color 0.2s, border-color 0.2s;
 }
 
-.form-control input[type="checkbox"]:checked {
+.form-control input[type='checkbox']:checked {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="white" d="M6.173 12.247l-4.146-4.147 1.414-1.414 2.732 2.732 6.247-6.248 1.414 1.414-7.661 7.663z"/></svg>');
@@ -197,7 +209,7 @@ form {
   background-size: 12px;
 }
 
-.form-control input[type="checkbox"]:hover {
+.form-control input[type='checkbox']:hover {
   border-color: var(--color-primary);
   box-shadow: 0 0 4px var(--color-border);
 }
@@ -211,7 +223,7 @@ form {
   cursor: pointer;
 }
 
-.form-control input[type="checkbox"]:focus {
+.form-control input[type='checkbox']:focus {
   outline: 2px solid var(--color-border);
   outline-offset: 2px;
 }
@@ -223,7 +235,7 @@ form {
   margin-bottom: 0.5rem;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type='checkbox'] {
   flex-shrink: 0;
 }
 
@@ -247,7 +259,7 @@ form {
   margin-top: 0.25rem;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   display: inline-block;
   width: 100%;
   padding: 0.75rem;
@@ -260,19 +272,19 @@ button[type="submit"] {
   transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-button[type="submit"]:hover {
+button[type='submit']:hover {
   background-color: var(--color-primary);
   color: var(--color-bg-light);
 }
 
-button[type="submit"]:disabled {
+button[type='submit']:disabled {
   background-color: var(--color-bg-light);
-  color: var(--color-border); 
-  border: 2px solid var(--color-border); 
-  cursor: not-allowed; 
+  color: var(--color-border);
+  border: 2px solid var(--color-border);
+  cursor: not-allowed;
 }
 
-button[type="submit"]:disabled:hover {
+button[type='submit']:disabled:hover {
   background-color: var(--color-bg-light);
   color: var(--color-border);
 }
@@ -290,7 +302,7 @@ table {
 
   &.ranking {
     width: 100%;
-    
+
     th {
       vertical-align: middle;
     }
@@ -300,12 +312,12 @@ table {
   }
 
   &.results {
-    th, td {
+    th,
+    td {
       text-align: center;
       vertical-align: middle;
       width: 33.33%;
     }
-    
   }
 
   th,
@@ -318,7 +330,7 @@ table {
   thead {
     background-color: var(--color-border);
     color: var(--color-bg-dark);
-    
+
     th {
       text-align: inherit;
       font-family: var(--typo-text);
@@ -382,10 +394,10 @@ table {
   transition: all 0.5s;
 
   &:hover {
-      background-color: var(--color-primary);
-      color: var(--color-bg-light);
+    background-color: var(--color-primary);
+    color: var(--color-bg-light);
 
-      transition: all 0.5s;
+    transition: all 0.5s;
   }
 }
 
@@ -397,11 +409,11 @@ table {
   transition: all 0.5s;
 
   &:hover {
-      border: 2px solid var(--color-secondary);
-      background-color: var(--color-secondary);
-      color: var(--color-bg-light);
+    border: 2px solid var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-bg-light);
 
-      transition: all 0.5s;
+    transition: all 0.5s;
   }
 }
 

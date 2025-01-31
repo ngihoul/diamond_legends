@@ -19,3 +19,8 @@
     }
   }
 }
+
+.alert-container {
+  width: 50%;
+  margin: -0.8rem auto 2.4rem;
+}

@@ -10,6 +10,7 @@ import { useGame } from '@/lib/contexts/gameContext';
 import { PlayersTable } from '../PlayersTable/PlayersTable';
 
 import './PreviewDetails.css';
+import Alert from '@/components/UIUX/Alert/Alert';
 
 export default function PreviewDetails({ gameId }: { gameId: number }) {
   const [game, setGame] = useState<Game | null>(null);
@@ -78,6 +79,9 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
             <p className='subtitle'>
               {game?.away.name} vs {game?.home.name}
             </p>
+          </div>
+          <div className='alert-container'>
+            <Alert type='info'>Déplacez les joueurs dans l'ordre souhaité. Ensuite, choisissez leur position.</Alert>
           </div>
           <div className='teams-container'>
             <div className='away-team team'>
