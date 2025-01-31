@@ -2,7 +2,7 @@
 
 import { HandedType, Player, PositionType } from "@/lib/models/player.model";
 import { Team } from "@/lib/models/team.model";
-import { getTeam } from "@/lib/services/team";
+import { getTeam } from "@/lib/services/team.service";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

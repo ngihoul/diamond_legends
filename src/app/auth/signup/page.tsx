@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import './page.css';
-import getCountries from '@/lib/services/countries';
+import getCountries from '@/lib/services/countries.service';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerSchema } from '@/lib/validations/schemas';
 import { SignUpFormValues } from '@/lib/models/auth.model';

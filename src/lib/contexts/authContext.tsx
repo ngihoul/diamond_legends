@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContextType, AuthProviderProps, Payload, SignInFormValues, SignUpFormValues } from "../models/auth.model";
-import apiClient from "../services/api";
+import apiClient from "../services/api.service";
 import { ToastType } from "../models/toaster.model";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";

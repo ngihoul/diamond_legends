@@ -1,4 +1,4 @@
-import { getLeague } from "@/lib/services/league";
+import { getLeague } from "@/lib/services/league.service";
 import TeamButton from "./_temp/TeamButton";
 import { League } from "@/lib/models/league.model";
 

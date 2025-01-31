@@ -1,6 +1,6 @@
 import { API_URL } from "../../../config";
 import { Country } from "../models/country.model";
-import apiClient from "./api";
+import apiClient from "./api.service";
 
 export default async function getCountries(): Promise<Country[]> {
     try {

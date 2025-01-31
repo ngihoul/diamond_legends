@@ -3,8 +3,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { GameContextType, GameProviderProps } from "../models/game.model";
-import { getTeam } from "../services/team";
-import { getLeague } from "../services/league";
+import { getTeam } from "../services/team.service";
+import { getLeague } from "../services/league.service";
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 

@@ -1,5 +1,5 @@
 import { Game, GameQuery } from "../models/game.model";
-import apiClient from "./api";
+import apiClient from "./api.service";
 
 export async function getGames(query: GameQuery): Promise<Game[]> {
     try {

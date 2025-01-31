@@ -1,5 +1,5 @@
 import { League } from "../models/league.model";
-import apiClient, { apiServer } from "./api";
+import apiClient, { apiServer } from "./api.service";
 
 export const getLeague = async (leagueId: number): Promise<League> => {
     try {

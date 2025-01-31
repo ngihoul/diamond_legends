@@ -1,4 +1,4 @@
-import apiClient from "./api";
+import apiClient from "./api.service";
 
 export async function getPlayer(playerId: number) {
     try {

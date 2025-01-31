@@ -1,5 +1,5 @@
 import { Team, TeamCreationValues } from "../models/team.model";
-import apiClient from "./api";
+import apiClient from "./api.service";
 
 export async function createTeam(values : TeamCreationValues) {
     try {

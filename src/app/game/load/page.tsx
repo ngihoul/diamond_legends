@@ -3,7 +3,7 @@
 import { useAuth } from "@/lib/contexts/authContext";
 import { useToaster } from "@/lib/contexts/toasterContext";
 import { Team } from "@/lib/models/team.model";
-import apiClient from "@/lib/services/api";
+import apiClient from "@/lib/services/api.service";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

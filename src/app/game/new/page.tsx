@@ -3,8 +3,8 @@
 import UniformPreview from "@/app/_components/UniformPreview/UniformPreview";
 import { Country } from "@/lib/models/country.model";
 import { Team, TeamCreationValues } from "@/lib/models/team.model";
-import getCountries from "@/lib/services/countries";
-import { createTeam } from "@/lib/services/team";
+import getCountries from "@/lib/services/countries.service";
+import { createTeam } from "@/lib/services/team.service";
 import { TeamCreationSchema } from "@/lib/validations/schemas"
 import { ErrorMessage, Field, Form, Formik } from "formik"
 import { useEffect, useState } from "react"

@@ -9,11 +9,11 @@ import Image from 'next/image';
 import ball from '@/public/img/ball_without_bg.png';
 import { useEffect, useState } from 'react';
 import { Team } from '@/lib/models/team.model';
-import { getTeam } from '@/lib/services/team';
+import { getTeam } from '@/lib/services/team.service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faChartLine, faChartSimple, faForwardFast, faPeopleGroup, faPlay, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
-import { nextDay, nextGame } from '@/lib/services/league';
+import { nextDay, nextGame } from '@/lib/services/league.service';
 import { useToaster } from '@/lib/contexts/toasterContext';
 
 export default function NavBar() {
