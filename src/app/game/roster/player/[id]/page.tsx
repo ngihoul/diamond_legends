@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import PlayerDetails from "./playerDetails";
 import Loader from "@/app/_components/Loader/Loader";
 
-export default async function PlayerProfile({ params }: { params: { id: number } }) {
+export default async function PlayerProfile({ params }: { params: Promise<{ id: number }> }) {
   const playerId = (await params).id;
 
   return (

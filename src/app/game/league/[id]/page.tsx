@@ -2,7 +2,7 @@ import { getLeague } from "@/lib/services/league";
 import TeamButton from "./_temp/TeamButton";
 import { League } from "@/lib/models/league.model";
 
-export default async function LeaguePage({ params } : { params : { id: number}}) {
+export default async function LeaguePage({ params } : { params : Promise<{ id: number}>}) {
     const leagueId = (await params).id;
 
 

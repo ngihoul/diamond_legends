@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 
 import './page.css';
 import { Player, PositionType } from "@/lib/models/player.model";
-import { connection } from "next/server";
-import { log } from "console";
 
 export default function PreviewDetails({ gameId } : { gameId : number }) {
     // Get all positions except pitchers from Position Enum

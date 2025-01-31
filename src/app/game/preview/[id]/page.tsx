@@ -2,7 +2,7 @@ import Loader from "@/app/_components/Loader/Loader";
 import { Suspense } from "react";
 import PreviewDetails from "./PreviewDetails";
 
-export default async function Preview({ params } : { params : { id: number}}) {
+export default async function Preview({ params } : { params : Promise<{ id: number}>}) {
     const gameId = (await params).id;
 
     return (

@@ -22,7 +22,7 @@ export default function RosterDetails({ teamId } : { teamId: number }) {
         }
 
         fetchTeam();
-    }, []);
+    }, [teamId]);
 
     return (
         <div className="roster-container">
