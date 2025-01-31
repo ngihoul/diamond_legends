@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useGame } from '@/lib/contexts/gameContext';
 import { useRouter } from 'next/navigation';
-import Button from '@/components/Button/Button';
+import Button from '@/components/UIUX/Button/Button';
 
 import './page.css';
 

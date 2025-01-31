@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import PreviewDetails from '@/components/PreviewDetails/PreviewDetails';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/components/UIUX/Loader/Loader';
+import PreviewDetails from '@/components/Preview/PreviewDetails/PreviewDetails';
 
 export default async function Preview({ params }: { params: Promise<{ id: number }> }) {
   const gameId = (await params).id;

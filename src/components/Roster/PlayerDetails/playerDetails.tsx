@@ -12,7 +12,7 @@ import { Radar } from 'react-chartjs-2';
 import Link from 'next/link';
 
 import './PlayerDetails.css';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/components/UIUX/Loader/Loader';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 

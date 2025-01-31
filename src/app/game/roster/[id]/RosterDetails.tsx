@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import './page.css';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/components/UIUX/Loader/Loader';
 
 export default function RosterDetails({ teamId }: { teamId: number }) {
   const [team, setTeam] = useState({} as Team);

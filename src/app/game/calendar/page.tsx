@@ -7,8 +7,8 @@ import { getTeam } from '@/lib/services/team.service';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import GameCard from '@/components/GameCard/GameCard';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/components/UIUX/Loader/Loader';
+import GameCard from '@/components/Calendar/GameCard/GameCard';
 
 import './page.css';
 
