@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import PlayerDetails from '../../../../../components/PlayerDetails/playerDetails';
+import PlayerDetails from '@/components/PlayerDetails/playerDetails';
 import Loader from '@/components/Loader/Loader';
 
 export default async function PlayerProfile({ params }: { params: Promise<{ id: number }> }) {
