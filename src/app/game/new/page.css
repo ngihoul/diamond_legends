@@ -1,13 +1,13 @@
 .uniform-picker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    > div {
-        width: 50%;
-    }
+  > div {
+    width: 50%;
+  }
 
-    .uniform-preview svg {
-        height: 400px;
-    }
+  .uniform-preview svg {
+    height: 400px;
+  }
 }

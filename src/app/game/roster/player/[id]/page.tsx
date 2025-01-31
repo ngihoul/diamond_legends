@@ -1,6 +1,6 @@
-import { Suspense } from "react";
-import PlayerDetails from "./playerDetails";
-import Loader from "@/app/_components/Loader/Loader";
+import { Suspense } from 'react';
+import PlayerDetails from '../../../../../components/PlayerDetails/playerDetails';
+import Loader from '@/components/Loader/Loader';
 
 export default async function PlayerProfile({ params }: { params: Promise<{ id: number }> }) {
   const playerId = (await params).id;

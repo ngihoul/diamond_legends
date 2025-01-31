@@ -1,44 +1,42 @@
 .calendar-container {
-    .filters {
-        display: flex;
-        justify-content: start;
-        align-items: baseline;
-        margin-bottom: 1.6rem;
+  .filters {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+    margin-bottom: 1.6rem;
+  }
+
+  .current-month {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    p {
+      margin: 0 1.2rem;
+      min-width: 180px;
     }
 
-    .current-month {
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
+    span {
+      cursor: pointer;
 
-        p {
-            margin: 0 1.2rem;
-            min-width: 180px;
-        }
+      transition: color 0.5s ease;
 
-        span {
-            cursor: pointer;
+      &:hover {
+        color: var(--color-primary);
 
-            transition: color 0.5s ease;
-
-            &:hover {
-                color: var(--color-primary);
-
-                transition: color 0.5s ease;
-            }
-        }
+        transition: color 0.5s ease;
+      }
     }
+  }
 }
-    
-
 
 .calendar-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: start;
-    gap: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 0.8rem;
 
-    .calendar-item {
-        width: calc(50% - 0.8rem);
-    }
+  .calendar-item {
+    width: calc(50% - 0.8rem);
+  }
 }
