@@ -6,9 +6,9 @@ import { getTeam } from '@/lib/services/team.service';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Loader from '@/components/UIUX/Loader/Loader';
 
 import './page.css';
-import Loader from '@/components/UIUX/Loader/Loader';
 
 export default function RosterDetails({ teamId }: { teamId: number }) {
   const [team, setTeam] = useState({} as Team);
