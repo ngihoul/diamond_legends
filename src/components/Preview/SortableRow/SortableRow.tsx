@@ -2,6 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PositionType } from '@/lib/models/player.model';
 import { SortableRowProps } from '@/lib/models/lineup.model';
+import EnergyBar from '@/components/Roster/EnergyBar/EnergyBar';
 
 export const SortableRow = ({
   player,
@@ -56,7 +57,9 @@ export const SortableRow = ({
       <td {...(isSelectedTeam ? { ...attributes, ...listeners } : {})}>
         {player.lastname} {player.firstname}
       </td>
-      <td {...(isSelectedTeam ? { ...attributes, ...listeners } : {})}>{player.energy}%</td>
+      <td {...(isSelectedTeam ? { ...attributes, ...listeners } : {})}>
+        <EnergyBar energy={player.energy} />
+      </td>
       <td {...(isSelectedTeam ? { ...attributes, ...listeners } : {})}>
         {player.positions.map((pos: number) => PositionType[pos]).join(', ')}
       </td>

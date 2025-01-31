@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Loader from '@/components/UIUX/Loader/Loader';
 
 import './page.css';
+import EnergyBar from '@/components/Roster/EnergyBar/EnergyBar';
 
 export default function RosterDetails({ teamId }: { teamId: number }) {
   const [team, setTeam] = useState({} as Team);
@@ -59,17 +60,7 @@ export default function RosterDetails({ teamId }: { teamId: number }) {
                   </td>
                   <td>{`${HandedType[player.throw]} / ${HandedType[player.bat]}`}</td>
                   <td className='energy'>
-                    <div
-                      className='energy-bar'
-                      style={
-                        player.energy === 100
-                          ? { width: '100%', backgroundColor: 'green' }
-                          : player.energy >= 70 && player.energy < 100
-                          ? { width: `${player.energy}%`, backgroundColor: '#ACE1AF' }
-                          : player.energy > 50 && player.energy < 70
-                          ? { width: `${player.energy}%`, backgroundColor: 'orange' }
-                          : { width: `${player.energy}%`, backgroundColor: 'red' }
-                      }></div>
+                    <EnergyBar energy={player.energy} />
                   </td>
                   <td>{player.positions.map((pos: number) => PositionType[pos]).join(', ')}</td>
                   <td>{player.avg > 0 ? player.avg.toFixed(3) : '0.000'}</td>
