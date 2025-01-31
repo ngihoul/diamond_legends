@@ -39,6 +39,7 @@ export default function RosterDetails({ teamId }: { teamId: number }) {
               <th>T/B</th>
               <th>Energie</th>
               <th>Positions</th>
+              <th>AVG</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +72,7 @@ export default function RosterDetails({ teamId }: { teamId: number }) {
                       }></div>
                   </td>
                   <td>{player.positions.map((pos: number) => PositionType[pos]).join(', ')}</td>
+                  <td>{player.avg > 0 ? player.avg.toFixed(3) : '0.000'}</td>
                 </tr>
               );
             })}
