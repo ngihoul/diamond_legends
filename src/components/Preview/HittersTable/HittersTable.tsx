@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import './PlayersTable.css';
-import { LineUpDetail, PlayersTableProps, PositionsInGame } from '@/lib/models/lineup.model';
+import { PlayersTableProps, PositionsInGame } from '@/lib/models/lineup.model';
 import { getFilteredPositions, getInitialPositionsInGame } from '@/lib/utils/positions';
 import { SortableRow } from '../SortableRow/SortableRow';
 
-export const PlayersTable = ({ players: initialPlayers, isSelectedTeam, onLineUpChange }: PlayersTableProps) => {
+import './HittersTable.css';
+
+export const HittersTable = ({ players: initialPlayers, isSelectedTeam, onLineUpChange }: PlayersTableProps) => {
   const [players, setPlayers] = useState(initialPlayers);
-  const positions = getFilteredPositions();
+  const positions = useMemo(() => getFilteredPositions(), []);
   const [positionsInGame, setPositionsInGame] = useState<PositionsInGame>(getInitialPositionsInGame());
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setPositionsInGame((prevValues) => {
       const newValues = { ...prevValues };
@@ -23,36 +24,38 @@ export const PlayersTable = ({ players: initialPlayers, isSelectedTeam, onLineUp
       newValues[name] = value;
       return newValues;
     });
-  };
+  }, []);
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    if (!isSelectedTeam) return;
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      if (!isSelectedTeam) return;
+      const { active, over } = event;
+      if (over && active.id !== over.id) {
+        setPlayers((items) => {
+          const oldIndex = items.findIndex((item) => item.id === active.id);
+          const newIndex = items.findIndex((item) => item.id === over.id);
+          return arrayMove(items, oldIndex, newIndex);
+        });
+      }
+    },
+    [isSelectedTeam],
+  );
 
-    const { active, over } = event;
-
-    if (over && active.id !== over.id) {
-      setPlayers((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (!isSelectedTeam || !onLineUpChange) return;
-
-    const lineUpDetails: LineUpDetail[] = players
+  const lineUpDetails = useMemo(() => {
+    return players
       .slice(0, 9)
       .map((player, index) => ({
         playerId: player.id,
-        order: index,
+        order: index + 1,
         position: parseInt(positionsInGame[`positionInGame${index + 1}`] || '0'),
       }))
       .filter((detail) => detail.position !== 0);
+  }, [players, positionsInGame]);
 
+  useEffect(() => {
+    if (!isSelectedTeam || !onLineUpChange) return;
     onLineUpChange(lineUpDetails);
-  }, [players, positionsInGame, isSelectedTeam, onLineUpChange]);
+  }, [lineUpDetails, isSelectedTeam, onLineUpChange]);
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

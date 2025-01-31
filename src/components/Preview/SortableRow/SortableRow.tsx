@@ -38,7 +38,7 @@ export const SortableRow = ({
                 value={positionsInGame[`positionInGame${index + 1}`]}>
                 <option value=''></option>
                 {positions.map((key, index) => (
-                  <option key={key} value={index + 1}>
+                  <option key={key} value={index + 2}>
                     {key}
                   </option>
                 ))}
