@@ -8,11 +8,10 @@ import { useEffect, useState } from "react";
 
 import './page.css';
 import { Player, PositionType } from "@/lib/models/player.model";
+import PlayersTable from "./PlayersTable";
+import { useGame } from "@/lib/contexts/gameContext";
 
 export default function PreviewDetails({ gameId } : { gameId : number }) {
-    // Get all positions except pitchers from Position Enum
-    const positions = Object.keys(PositionType).filter((value) => isNaN(Number(value)) && value != 'SP' && value != 'RP' && value != "CL" && value != "UTL");
-
     const [game, setGame] = useState<Game | null>(null);
     const [homeTeam, setHomeTeam] = useState<Team | null>(null);
     const [awayTeam, setAwayTeam] = useState<Team | null>(null);
@@ -22,6 +21,8 @@ export default function PreviewDetails({ gameId } : { gameId : number }) {
 
     const [awayHitters, setAwayHitters] = useState<Player[] | null>(null);
     const [awayPitchers, setAwayPitchers] = useState<Player[] | null>(null);
+
+    const { teamSelected } = useGame();
 
     const getHitters = (team: Team): Player[] => {
         console.log('test', JSON.stringify(team));
@@ -78,61 +79,20 @@ export default function PreviewDetails({ gameId } : { gameId : number }) {
                 </div>
                 <div className="teams-container">
                     <div className="away-team team">
-                        <h3>{awayTeam?.name}</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th colSpan={2}></th>
-                                    <th>Nom</th>
-                                    <th>Positions</th>
-                                    <th>AVG</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { awayHitters && awayHitters.length > 0 && awayHitters.map((player, index) => (
-                                    <tr key={player.id}>
-                                        { index < 9 ? ( <td>{ index + 1 }</td> ) : ( <td>BE</td> ) }
-                                        { index < 9 ? ( <td>
-                                            <select name="play-position">
-                                                <option value=""></option>
-                                                { positions.map((key, index) => ( 
-                                                    // Adding 1 to index to match with real Enum values
-                                                    <option key={key} value={index + 1}>{key}</option>
-                                                 ))}
-                                            </select>
-                                        </td> ) : ( <td></td> )}
-                                        <td>{player.lastname} {player.firstname}</td>
-                                        
-                                        <td>{player.positions.map((pos: number) => PositionType[pos]).join(', ')}</td>
-                                        <td>{player.avg ? (player.avg.toFixed(3)) : (`0.000`)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        { awayTeam && awayHitters && awayHitters.length > 0 && (
+                            <>
+                                <h3>{awayTeam?.name}</h3>
+                                <PlayersTable players={awayHitters} isSelectedTeam={awayTeam.id == teamSelected} />
+                            </>
+                        )}
                     </div>
                     <div className="home-team team">
-                        <h3>{homeTeam?.name}</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th colSpan={2}></th>
-                                    <th>Nom</th>
-                                    <th>Positions</th>
-                                    <th>AVG</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { homeHitters && homeHitters.length > 0 && homeHitters.map((player) => (
-                                    <tr key={player.id}>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{player.lastname} {player.firstname}</td>
-                                        <td>{player.positions.map((pos: number) => PositionType[pos]).join(', ')}</td>
-                                        <td>{player.avg ? (player.avg.toFixed(3)) : (`0.000`)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        { homeTeam && homeHitters && homeHitters.length > 0 && (
+                            <>
+                                <h3>{homeTeam?.name}</h3>
+                                <PlayersTable players={homeHitters} isSelectedTeam={homeTeam.id == teamSelected} />
+                            </>
+                        )}
                     </div>
                 </div>
             </>
