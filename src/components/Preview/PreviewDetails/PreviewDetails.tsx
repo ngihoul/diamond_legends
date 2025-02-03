@@ -34,7 +34,7 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
   const [lineUp, setLineUp] = useState<LineUpDetail[]>([]);
   const [startingPitcher, setStartingPitcher] = useState<LineUpDetail | null>(null);
 
-  const { teamSelected } = useGame();
+  const { teamSelected, saveLineUp } = useGame();
 
   useEffect(() => {
     const fetchTeam = async (teamId: number) => {
@@ -80,7 +80,7 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
     setLineUp(lineup);
   }, []);
 
-  const startGame = async (gameId: number) => {
+  const startGame = async (gameId: number, playByPlay: boolean = false) => {
     if (!startingPitcher) {
       showToast('Choisissez un lanceur partant', 'error');
       return;
@@ -94,8 +94,14 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
     const fullLineUp = { lineUpDetails: [...lineUp, startingPitcher] };
 
     try {
-      await playGame(gameId, fullLineUp);
-      router.push('/game/calendar');
+      if (!playByPlay) {
+        await playGame(gameId, fullLineUp, playByPlay);
+        // TODO : Redirect to match details
+        router.push('/game/calendar');
+      } else {
+        saveLineUp(fullLineUp);
+        router.push(`/game/play-by-play/${gameId}`);
+      }
     } catch (error) {
       showToast((error as Error).message, 'error');
     }
@@ -159,7 +165,13 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
               className='btn'>
               Simuler le match
             </Button>
-            {/* TODO: Ajouter un bouton pour regarder le match en play2play */}
+            <Button
+              action={() => {
+                startGame(game.id, true);
+              }}
+              className='btn'>
+              Voir le match
+            </Button>
           </div>
         </>
       )}
