@@ -1,14 +1,19 @@
 'use client';
 
 import { Game, GameEvent } from '@/lib/models/game.model';
-import { getGame, playGame } from '@/lib/services/game.service';
-import { useEffect, useState } from 'react';
+import { getGame } from '@/lib/services/game.service';
+import { useEffect, useRef, useState } from 'react';
 import { HUB_URL } from '../../../../config';
 import useSignalR from '@/lib/hooks/useSignaR';
 import { useGame } from '@/lib/contexts/gameContext';
 import Scoreboard from '../Scoreboard/Scoreboard';
 
-export default function PlayByPlayDetails({ gameId }: { gameId: number }) {
+import './PlayByPlayDetails.css';
+import field from '@/public/img/field.png';
+import Image from 'next/image';
+import { GameOffensiveStats } from '@/lib/models/stats.model';
+
+export default function PlayByPlayDetails({ gameId }: { gameId: string }) {
   const [game, setGame] = useState<Game | null>(null);
   const [events, setEvents] = useState<string[]>([]);
   const [outs, setNbOuts] = useState<number>(0);
@@ -17,19 +22,34 @@ export default function PlayByPlayDetails({ gameId }: { gameId: number }) {
   const [inning, setInning] = useState<number>(1);
   const [runsAway, setRunsAway] = useState<number>(0);
   const [runsHome, setRunsHome] = useState<number>(0);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const [bases, setBases] = useState<GameOffensiveStats[]>([]);
+
   const { lineUp } = useGame();
 
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollTo(0, messagesEndRef.current.scrollHeight);
+  };
+
   const handleEvent = (gameEvent: GameEvent) => {
-    setEvents([gameEvent.message]);
-    setInning(gameEvent.inning);
+    console.log(gameEvent);
+    setEvents((prevMessage) => [...prevMessage, gameEvent.message]);
+    setInning(gameEvent.halfInnings);
     setNbOuts(gameEvent.outs);
     setStrikes(gameEvent.strikes);
     setBalls(gameEvent.balls);
-    setRunsAway(gameEvent.runAway);
-    setRunsHome(gameEvent.runHome);
+    setRunsAway(gameEvent.runsAway);
+    setRunsHome(gameEvent.runsHome);
+    setBases(gameEvent.bases);
   };
 
-  const { isConnected } = useSignalR(HUB_URL, handleEvent);
+  const endHandler = (game: Game) => {
+    setGameOver(true);
+  };
+
+  const { isConnected, simulateGame } = useSignalR(HUB_URL, handleEvent, endHandler);
 
   useEffect(() => {
     const fetchGame = async (gameId: number) => {
@@ -37,15 +57,19 @@ export default function PlayByPlayDetails({ gameId }: { gameId: number }) {
       setGame(response);
     };
 
-    fetchGame(gameId);
+    fetchGame(parseInt(gameId));
 
+    console.log(isConnected);
     // start game
-    const startGame = async () => {
-      await playGame(gameId, lineUp!, true);
-    };
+    if (isConnected) {
+      const id = parseInt(gameId);
+      simulateGame(id, lineUp!);
+    }
+  }, [gameId, lineUp, isConnected]);
 
-    startGame();
-  }, [gameId, lineUp]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [events]);
 
   return (
     <div className='play-by-play-container'>
@@ -56,21 +80,47 @@ export default function PlayByPlayDetails({ gameId }: { gameId: number }) {
             <p className='subtitle'></p>
           </div>
           <div className='play-by-play-wrapper'>
-            <Scoreboard
-              homeTeam={game.home!}
-              awayTeam={game.away!}
-              inning={inning}
-              balls={balls}
-              strikes={strikes}
-              outs={outs}
-              runsHome={runsHome}
-              runsAway={runsAway}
-            />
-            <div className='actions'>
-              {events.map((event, index) => (
-                <p key={index}>{event}</p>
-              ))}
+            <div className='upper'>
+              <Scoreboard
+                homeTeam={game.home!}
+                awayTeam={game.away!}
+                inning={inning}
+                balls={balls}
+                strikes={strikes}
+                outs={outs}
+                runsHome={runsHome}
+                runsAway={runsAway}
+              />
+              <div className='field'>
+                <Image src={field} alt='field' width={140} height={140} />
+                {bases[0] && (
+                  <p className='first-base'>
+                    {`${bases[0].player.firstname.substring(0, 1)}. ${bases[0].player.lastname}`}
+                  </p>
+                )}
+                {bases[1] && (
+                  <p className='second-base'>
+                    {`${bases[1].player.firstname.substring(0, 1)}. ${bases[1].player.lastname}`}
+                  </p>
+                )}
+                {bases[2] && (
+                  <p className='third-base'>
+                    {`${bases[2].player.firstname.substring(0, 1)}. ${bases[2].player.lastname}`}
+                  </p>
+                )}
+              </div>
             </div>
+
+            <div className='actions-wrapper'>
+              <h3>Jeux en direct</h3>
+              <div ref={messagesEndRef} className='actions'>
+                {events.map((event, index) => (
+                  <p key={index}>{event}</p>
+                ))}
+              </div>
+            </div>
+
+            {gameOver && <p>GameOver</p>}
             <div className='away-line-up'></div>
             <div className='home-line-up'></div>
           </div>

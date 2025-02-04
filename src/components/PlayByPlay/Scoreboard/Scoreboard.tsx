@@ -34,7 +34,7 @@ export default function Scoreboard({
         </div>
         <div className='inning'>
           <div className='name'>Inning</div>
-          <div className='score'>{Math.floor((inning ?? 1) + 1 / 2)}</div>
+          <div className='score'>{Math.floor(inning / 2) + 1}</div>
         </div>
         <div className='home'>
           <div className='name'>{homeTeam.name}</div>

@@ -24,5 +24,6 @@ export interface SortableRowProps {
 }
 
 export interface FullLineUp {
+  gameId: number;
   lineUpDetails: LineUpDetail[];
 }

@@ -1,0 +1,57 @@
+.play-by-play-container {
+  margin-bottom: -2.8rem;
+}
+
+.upper {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+
+  .field {
+    margin-left: 1.6rem;
+    position: relative;
+
+    .first-base,
+    .second-base,
+    .third-base {
+      text-align: center;
+      position: absolute;
+      width: 100px;
+      background-color: #fff;
+    }
+
+    .first-base {
+      top: calc(50% - 10px);
+      right: calc(-50% + 40px);
+    }
+
+    .second-base {
+      top: calc(15% - 5px);
+      left: calc(50% - 50px);
+    }
+
+    .third-base {
+      top: calc(50% - 10px);
+      left: calc(-50% + 40px);
+    }
+  }
+}
+
+.actions-wrapper {
+  h3 {
+    font-family: var(--typo-text);
+    letter-spacing: inherit;
+    background-color: var(--color-primary);
+    color: var(--color-bg-light);
+    padding: 0.8rem;
+  }
+
+  .actions {
+    height: 360px;
+    overflow-y: scroll;
+    border: 2px solid var(--color-border);
+    padding: 1.6rem;
+    background-color: var(--color-bg-light);
+  }
+}

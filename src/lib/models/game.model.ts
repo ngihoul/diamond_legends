@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { TeamViewCalendar } from './team.model';
 import { FullLineUp } from './lineup.model';
+import { GameOffensiveStats } from './stats.model';
 
 export interface Game {
   id: number;
@@ -46,10 +47,11 @@ export enum GameStatus {
 
 export interface GameEvent {
   message: string;
-  inning: number;
+  halfInnings: number;
   balls: number;
   strikes: number;
   outs: number;
-  runHome: number;
-  runAway: number;
+  runsHome: number;
+  runsAway: number;
+  bases: GameOffensiveStats[];
 }

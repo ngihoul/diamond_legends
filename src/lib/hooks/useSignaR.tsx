@@ -1,53 +1,43 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
-import { GameEvent } from '../models/game.model';
+import { Game, GameEvent } from '../models/game.model';
+import { FullLineUp } from '../models/lineup.model';
 
-const useSignalR = (hubUrl: string, eventHandler: (gameEvent: GameEvent) => void) => {
+const useSignalR = (hubUrl: string, eventHandler: (gameEvent: GameEvent) => void, endHandler: (game: Game) => void) => {
   const [isConnected, setIsConnected] = useState(false);
+  const connection = useRef<signalR.HubConnection>(null);
+
+  const simulateGame = (gameId: number, lineUpDetails: FullLineUp) => {
+    lineUpDetails.gameId = gameId;
+    connection.current?.invoke('SimulateGame', lineUpDetails);
+  };
 
   useEffect(() => {
-    const connection = new signalR.HubConnectionBuilder()
-      .withUrl(hubUrl, {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
-      })
-      .configureLogging(signalR.LogLevel.Information)
-      .withAutomaticReconnect([3000])
-      .build();
+    connection.current = new signalR.HubConnectionBuilder().withUrl(hubUrl).build();
 
     const startConnection = async () => {
       try {
-        await connection.start();
+        await connection.current?.start();
         console.log('SignalR Connected');
         setIsConnected(true);
       } catch (err) {
         console.error('SignalR Connection Error:', err);
         setIsConnected(false);
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-        startConnection();
       }
     };
 
-    if (connection.connectionId) {
-      connection.off('SendEvent'); // Retirer les anciens handlers si nécessaire
-    }
+    connection.current?.on('SendEvents', eventHandler);
 
-    connection.on('SendEvent', eventHandler);
-
-    connection.onclose(() => {
-      console.log('SignalR Disconnected');
-      setIsConnected(false);
-      startConnection();
-    });
+    connection.current?.on('GameEnd', endHandler);
 
     startConnection();
 
     return () => {
-      connection.stop();
+      connection.current?.stop();
     };
-  }, [hubUrl, eventHandler]);
+  }, []);
 
-  return { isConnected };
+  return { isConnected, simulateGame };
 };
 
 export default useSignalR;

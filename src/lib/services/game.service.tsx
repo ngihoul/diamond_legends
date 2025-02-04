@@ -20,9 +20,9 @@ export async function getGame(gameId: number): Promise<Game> {
   }
 }
 
-export async function playGame(gameId: number, fullLineUp: FullLineUp, playByPlay: boolean = false): Promise<Game> {
+export async function playGame(gameId: number, fullLineUp: FullLineUp): Promise<Game> {
   try {
-    const response = await apiClient.post(`/game/play/${gameId}?playByPlay=${playByPlay}`, fullLineUp);
+    const response = await apiClient.post(`/game/play/${gameId}`, fullLineUp);
     return response.data;
   } catch (error) {
     throw new Error((error as Error).message, error as Error);

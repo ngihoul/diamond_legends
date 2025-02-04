@@ -2,14 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  border: 1px solid var(--color-border);
-  margin: 0 auto 2.4rem;
 
   .up,
   .down {
     display: flex;
     justify-content: center;
-    border: 1px solid var(--color-border);
+    /* border: 1px solid var(--color-border); */
 
     .name,
     .score {
@@ -38,9 +36,24 @@
     .name {
       border: 1px solid var(--color-border);
     }
+
+    .name {
+      background-color: var(--color-primary);
+      color: var(--color-bg-light);
+      font-weight: bolder;
+    }
+
+    .score {
+      background-color: var(--color-bg-light);
+    }
   }
 
   .down {
-    justify-content: space-between;
+    justify-content: space-around;
+    background-color: var(--color-bg-light);
+
+    .score {
+      width: 100px;
+    }
   }
 }
