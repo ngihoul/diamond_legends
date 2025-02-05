@@ -8,8 +8,6 @@ import { SignUpFormValues } from '@/lib/models/auth.model';
 import { useAuth } from '@/lib/contexts/authContext';
 import { Country } from '@/lib/models/country.model';
 
-import './page.css';
-
 export default function SignUp() {
   const [nationalities, setNationalities] = useState<Country[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
