@@ -1,0 +1,39 @@
+.batters-stats-table {
+  font-size: 0.8rem;
+
+  thead {
+    background-color: var(--color-secondary);
+    color: var(--color-bg-light);
+  }
+
+  .player-name {
+    font-weight: bolder;
+  }
+
+  .player-position {
+    font-size: 0.8rem;
+  }
+
+  th:not(.avg, .ops),
+  td:not(.avg, .ops) {
+    max-width: 35px;
+  }
+
+  th:not(.batter-name),
+  td:not(.batter-name) {
+    text-align: center;
+  }
+
+  th.batter-name,
+  td.batter-name {
+    min-width: 130px;
+  }
+}
+
+.other-stats {
+  font-size: 0.9rem;
+
+  .label {
+    font-weight: bolder;
+  }
+}

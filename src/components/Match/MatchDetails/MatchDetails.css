@@ -1,0 +1,43 @@
+.match-details-container {
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.6rem;
+    border: 1px solid var(--color-secondary);
+    padding: 1.6rem;
+    background-color: var(--color-bg-light);
+    text-align: center;
+
+    .away-team,
+    .home-team {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-width: 130px;
+
+      .name {
+        font-weight: bolder;
+      }
+
+      .abbreviation {
+        font-size: 0.8rem;
+      }
+    }
+
+    .away-score,
+    .home-score {
+      min-width: 40px;
+      font-size: 2rem;
+    }
+  }
+
+  .batters-boxes,
+  .pitchers-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.6rem;
+    margin-bottom: 2.4rem;
+  }
+}

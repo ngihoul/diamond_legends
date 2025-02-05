@@ -25,3 +25,29 @@ export interface GameOffensiveStats {
   so: number;
   triple: number;
 }
+
+export interface GamePitchingStats {
+  id: number;
+  game: Game;
+  player: Player;
+  w: number;
+  l: number;
+  g: number;
+  gs: number;
+  cg: number;
+  sho: number;
+  hld: number;
+  sv: number;
+  svo: number;
+  ip: number;
+  h: number;
+  r: number;
+  er: number;
+  hr: number;
+  np: number;
+  bb: number;
+  hb: number;
+  ibb: number;
+  so: number;
+  era: number;
+}

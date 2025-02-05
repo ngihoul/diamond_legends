@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { TeamViewCalendar } from './team.model';
 import { FullLineUp } from './lineup.model';
-import { GameOffensiveStats } from './stats.model';
+import { GameOffensiveStats, GamePitchingStats } from './stats.model';
 
 export interface Game {
   id: number;
@@ -16,6 +16,11 @@ export interface Game {
   awayHits?: number;
   homeErrors?: number;
   awayErrors?: number;
+}
+
+export interface GameWithResults extends Game {
+  offensiveStats: GameOffensiveStats[];
+  pitchingStats: GamePitchingStats[];
 }
 
 export interface GameQuery {

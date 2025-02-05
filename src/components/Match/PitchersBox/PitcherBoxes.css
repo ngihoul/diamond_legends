@@ -1,0 +1,32 @@
+.pitchers-stats-table {
+  font-size: 0.8rem;
+  min-width: 490px;
+
+  thead {
+    background-color: var(--color-secondary);
+    color: var(--color-bg-light);
+  }
+
+  th:not(.era),
+  td:not(.era) {
+    max-width: 35px;
+  }
+
+  th:not(.pitcher-name),
+  td:not(.pitcher-name) {
+    text-align: center;
+  }
+
+  th.pitcher-name,
+  td.pitcher-name {
+    min-width: 130px;
+  }
+}
+
+.other-stats {
+  font-size: 0.9rem;
+
+  .label {
+    font-weight: bolder;
+  }
+}
