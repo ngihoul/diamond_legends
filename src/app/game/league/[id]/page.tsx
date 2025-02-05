@@ -1,5 +1,5 @@
 import { getLeague } from '@/lib/services/league.service';
-import TeamButton from '../../../../components/Roster/TeamButton/TeamButton';
+import TeamButton from '@/components/Roster/TeamButton/TeamButton';
 import { League } from '@/lib/models/league.model';
 
 export default async function LeaguePage({ params }: { params: Promise<{ id: number }> }) {
