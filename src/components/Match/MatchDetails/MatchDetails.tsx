@@ -9,6 +9,7 @@ import './MatchDetails.css';
 import BattersBox from '../BattersBox/BattersBox';
 import moment from 'moment';
 import PitchersBox from '../PitchersBox/PitchersBox';
+import Link from 'next/link';
 
 type MatchDetailsProps = {
   gameId: number;
@@ -30,6 +31,9 @@ export default function MatchDetails({ gameId }: MatchDetailsProps) {
     <div className='match-details-container'>
       {game && (
         <>
+          <div className='breadcrumb'>
+            <Link href={`/game/calendar/`}>← Retour vers le calendrier</Link>
+          </div>
           <div className='summary'>
             <div className='away-team'>
               <div className='name'>{game.away.name}</div>

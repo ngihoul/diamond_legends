@@ -91,13 +91,12 @@ export default function PreviewDetails({ gameId }: { gameId: number }) {
       return;
     }
 
-    const fullLineUp = { lineUpDetails: [...lineUp, startingPitcher] };
+    const fullLineUp = { gameId: gameId, lineUpDetails: [...lineUp, startingPitcher] };
 
     try {
       if (!playByPlay) {
-        await playGame(gameId, fullLineUp, playByPlay);
-        // TODO : Redirect to match details
-        router.push('/game/calendar');
+        await playGame(fullLineUp);
+        router.push(`/game/match/${gameId}`);
       } else {
         saveLineUp(fullLineUp);
         router.push(`/game/play-by-play/${gameId}`);

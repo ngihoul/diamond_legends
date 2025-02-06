@@ -1,6 +1,6 @@
 'use client';
 
-import { Game, GameEvent } from '@/lib/models/game.model';
+import { Game, GameEvent, GameWithResults } from '@/lib/models/game.model';
 import { getGame } from '@/lib/services/game.service';
 import { useEffect, useRef, useState } from 'react';
 import { HUB_URL } from '../../../../config';
@@ -12,6 +12,7 @@ import './PlayByPlayDetails.css';
 import field from '@/public/img/field.png';
 import Image from 'next/image';
 import { GameOffensiveStats } from '@/lib/models/stats.model';
+import { useRouter } from 'next/navigation';
 
 export default function PlayByPlayDetails({ gameId }: { gameId: string }) {
   const [game, setGame] = useState<Game | null>(null);
@@ -22,12 +23,13 @@ export default function PlayByPlayDetails({ gameId }: { gameId: string }) {
   const [inning, setInning] = useState<number>(1);
   const [runsAway, setRunsAway] = useState<number>(0);
   const [runsHome, setRunsHome] = useState<number>(0);
-  const [gameOver, setGameOver] = useState<boolean>(false);
   const [bases, setBases] = useState<GameOffensiveStats[]>([]);
 
   const { lineUp } = useGame();
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const router = useRouter();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollTo(0, messagesEndRef.current.scrollHeight);
@@ -45,8 +47,8 @@ export default function PlayByPlayDetails({ gameId }: { gameId: string }) {
     setBases(gameEvent.bases);
   };
 
-  const endHandler = (game: Game) => {
-    setGameOver(true);
+  const endHandler = (game: GameWithResults) => {
+    router.push(`/game/match/${game.id}`);
   };
 
   const { isConnected, simulateGame } = useSignalR(HUB_URL, handleEvent, endHandler);
@@ -119,10 +121,6 @@ export default function PlayByPlayDetails({ gameId }: { gameId: string }) {
                 ))}
               </div>
             </div>
-
-            {gameOver && <p>GameOver</p>}
-            <div className='away-line-up'></div>
-            <div className='home-line-up'></div>
           </div>
         </>
       )}

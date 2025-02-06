@@ -30,7 +30,7 @@ export default function Calendar() {
 
   const { teamSelected, inGameDate } = useGame();
 
-  const [games, setGames] = useState<Game[]>([]);
+  const [games, setGames] = useState<Game[] | null>(null);
   const [month, setMonth] = useState<number | null>(inGameDate ? inGameDate.getMonth() + 1 : null);
   const [onlyMines, setOnlyMines] = useState<boolean>(false);
 

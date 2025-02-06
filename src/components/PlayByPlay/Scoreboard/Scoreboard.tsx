@@ -2,7 +2,7 @@ import { TeamViewCalendar } from '@/lib/models/team.model';
 
 import './Scoreboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp, faCircle, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 type ScoreboardProps = {
   homeTeam: TeamViewCalendar;
@@ -34,7 +34,14 @@ export default function Scoreboard({
         </div>
         <div className='inning'>
           <div className='name'>Inning</div>
-          <div className='score'>{Math.floor(inning / 2) + 1}</div>
+          <div className='score'>
+            {Math.floor(inning) % 2 == 0 ? (
+              <FontAwesomeIcon icon={faCaretUp} />
+            ) : (
+              <FontAwesomeIcon icon={faCaretDown} />
+            )}{' '}
+            {Math.floor(inning / 2) + 1}
+          </div>
         </div>
         <div className='home'>
           <div className='name'>{homeTeam.name}</div>

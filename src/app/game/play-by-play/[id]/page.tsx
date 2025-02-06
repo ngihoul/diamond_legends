@@ -2,7 +2,7 @@ import PlayByPlayDetails from '@/components/PlayByPlay/PlayByPlayDetails/PlayByP
 import Loader from '@/components/UIUX/Loader/Loader';
 import { Suspense } from 'react';
 
-export default async function Preview({ params }: { params: Promise<{ id: number }> }) {
+export default async function Preview({ params }: { params: Promise<{ id: string }> }) {
   const gameId = (await params).id;
 
   return (

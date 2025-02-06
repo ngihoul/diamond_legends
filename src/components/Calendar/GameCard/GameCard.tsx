@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/UIUX/Button/Button';
 
 import './GameCard.css';
+import Link from 'next/link';
 
 export default function GameCard({ game }: { game: Game }) {
   const { teamSelected, inGameDate } = useGame();
@@ -60,6 +61,16 @@ export default function GameCard({ game }: { game: Game }) {
           )}
         </tbody>
       </table>
+      <div className='see-recap'>
+        {game.status == GameStatus.played ? (
+          <Link href={`/game/match/${game.id}`}>
+            {'>'}
+            {'>'} Voir le recap
+          </Link>
+        ) : (
+          ''
+        )}
+      </div>
     </div>
   );
 }

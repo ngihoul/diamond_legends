@@ -28,7 +28,7 @@ const useSignalR = (hubUrl: string, eventHandler: (gameEvent: GameEvent) => void
 
     connection.current?.on('SendEvents', eventHandler);
 
-    connection.current?.on('GameEnd', endHandler);
+    connection.current?.on('EndGame', endHandler);
 
     startConnection();
 

@@ -30,9 +30,9 @@ export async function getGame(gameId: number): Promise<Game> {
   }
 }
 
-export async function playGame(gameId: number, fullLineUp: FullLineUp): Promise<Game> {
+export async function playGame(fullLineUp: FullLineUp): Promise<Game> {
   try {
-    const response = await apiClient.post(`/game/play/${gameId}`, fullLineUp);
+    const response = await apiClient.post(`/game/play/${fullLineUp.gameId}`, fullLineUp);
     return response.data;
   } catch (error) {
     throw new Error((error as Error).message, error as Error);
