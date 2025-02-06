@@ -66,12 +66,15 @@
    - 1 releveur et ;
    - 1 closer
 
-9. L'utilisateur peut :
+9. L'utilisateur peut : [v]
 
    - simuler un match (résultats instantanés) [v]
-   - suivre le match en play by play
+   - suivre le match en play by play [v]
 
-10. L'utilisateur peut consulter les statistiques du match simulé et les resultats des autres matchs
+10. L'utilisateur peut consulter les statistiques :
+
+- du match simulé et [v]
+- les resultats des autres matchs
 
 11. L'utilisateur peut consulter le classement de la saison en cours et des saisons précédentes
 
