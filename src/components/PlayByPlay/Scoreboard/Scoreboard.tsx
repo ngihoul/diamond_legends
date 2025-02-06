@@ -2,7 +2,7 @@ import { TeamViewCalendar } from '@/lib/models/team.model';
 
 import './Scoreboard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown, faCaretUp, faCircle, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 type ScoreboardProps = {
   homeTeam: TeamViewCalendar;
